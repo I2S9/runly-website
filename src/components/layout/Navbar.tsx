@@ -6,6 +6,10 @@ import { useState } from "react";
 
 const BRAND = "#4EA6F5";
 
+/** Taille unique pour tout texte visible de la navbar */
+const NAV_TEXT =
+  "text-base font-medium leading-snug lg:text-lg xl:text-xl";
+
 const navLinks = [
   { href: "#features", label: "Fonctionnalités" },
   { href: "#rating", label: "Avis" },
@@ -17,35 +21,37 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 px-4 pt-4 font-sans sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 px-3 pt-3 font-sans sm:px-5 sm:pt-4 lg:px-8">
       <nav
         aria-label="Principale"
-        className="mx-auto flex max-w-6xl flex-col gap-3 rounded-3xl px-4 py-3 text-white sm:px-5 sm:py-3.5 md:rounded-full"
+        className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-3 rounded-3xl px-3 py-3 text-white sm:px-4 sm:py-3.5 md:rounded-full md:px-4 md:py-4 lg:px-6 lg:py-4"
         style={{ backgroundColor: BRAND }}
       >
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex min-w-0 items-center justify-between gap-2 sm:gap-3 md:gap-4">
           <Link
             href="/"
-            className="flex min-w-0 items-center gap-2.5 rounded-full focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#4EA6F5]"
+            className="flex min-w-0 max-w-[min(100%,14rem)] items-center gap-2 sm:gap-3 rounded-full focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#4EA6F5] sm:max-w-none"
             onClick={() => setOpen(false)}
           >
             <Image
               src="/branding/runly.svg"
               alt=""
-              width={36}
-              height={36}
-              className="size-9 shrink-0 object-contain"
+              width={64}
+              height={64}
+              className="size-12 shrink-0 object-contain sm:size-14 md:size-16"
               priority
               unoptimized
             />
-            <span className="truncate text-lg font-bold tracking-tight text-white sm:text-xl">
+            <span className="truncate tracking-tight text-white text-lg font-semibold leading-snug lg:text-xl xl:text-2xl">
               Runly
             </span>
           </Link>
 
-          <ul className="hidden items-center gap-8 text-[15px] text-white/90 md:flex">
+          <ul
+            className={`hidden min-w-0 items-center justify-center gap-3 text-white/90 md:flex md:gap-4 lg:gap-6 xl:gap-8 ${NAV_TEXT}`}
+          >
             {navLinks.map(({ href, label }) => (
-              <li key={href}>
+              <li key={href} className="shrink-0">
                 <Link href={href} className="text-white/90">
                   {label}
                 </Link>
@@ -53,28 +59,40 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden shrink-0 items-center gap-2 md:flex">
+          <div className="hidden shrink-0 items-center gap-2 md:flex md:gap-2 lg:gap-3">
             <a
               href="#"
-              className="inline-flex h-9 items-center gap-1.5 rounded-md bg-white px-3 text-xs font-semibold text-zinc-900"
+              className="inline-flex leading-none"
               aria-label="Télécharger sur l’App Store"
             >
-              <AppleIcon className="size-4 shrink-0" />
-              App Store
+              <Image
+                src="/branding/get-it-on-apple.png"
+                alt=""
+                width={180}
+                height={54}
+                className="h-9 w-auto object-contain object-left sm:h-10"
+                unoptimized
+              />
             </a>
             <a
               href="#"
-              className="inline-flex h-9 items-center gap-1.5 rounded-md bg-white px-3 text-xs font-semibold text-zinc-900"
+              className="inline-flex leading-none"
               aria-label="Télécharger sur Google Play"
             >
-              <PlayIcon className="size-4 shrink-0" />
-              Google Play
+              <Image
+                src="/branding/google-play-store-logo-png.webp"
+                alt=""
+                width={202}
+                height={60}
+                className="h-9 w-auto object-contain object-left sm:h-10"
+                unoptimized
+              />
             </a>
           </div>
 
           <button
             type="button"
-            className="inline-flex size-10 items-center justify-center rounded-full border border-white/50 text-white md:hidden"
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-white/50 text-white sm:size-12 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
@@ -93,13 +111,13 @@ export function Navbar() {
           }`}
         >
           <div className="min-h-0">
-            <div className="flex flex-col gap-4 border-t border-white/25 pt-3">
-              <ul className="flex flex-col gap-3 text-[15px] text-white/90">
+            <div className="flex flex-col gap-4 border-t border-white/25 pt-4">
+              <ul className={`flex flex-col gap-1 text-white/90 ${NAV_TEXT}`}>
                 {navLinks.map(({ href, label }) => (
                   <li key={href}>
                     <Link
                       href={href}
-                      className="block py-1 text-white/90"
+                      className="flex min-h-12 items-center py-2 text-white/90 sm:min-h-14 sm:py-2.5"
                       onClick={() => setOpen(false)}
                     >
                       {label}
@@ -107,20 +125,34 @@ export function Navbar() {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-wrap gap-2 pb-1">
+              <div className="flex flex-col items-center gap-3 pb-1 sm:flex-row sm:flex-wrap sm:justify-center">
                 <a
                   href="#"
-                  className="inline-flex h-9 flex-1 min-w-[140px] items-center justify-center gap-1.5 rounded-md bg-white px-3 text-xs font-semibold text-zinc-900"
+                  className="inline-flex w-full max-w-[220px] justify-center leading-none sm:flex-1 sm:max-w-none"
+                  aria-label="Télécharger sur l’App Store"
                 >
-                  <AppleIcon className="size-4 shrink-0" />
-                  App Store
+                  <Image
+                    src="/branding/get-it-on-apple.png"
+                    alt=""
+                    width={180}
+                    height={54}
+                    className="h-11 w-auto object-contain sm:h-10"
+                    unoptimized
+                  />
                 </a>
                 <a
                   href="#"
-                  className="inline-flex h-9 flex-1 min-w-[140px] items-center justify-center gap-1.5 rounded-md bg-white px-3 text-xs font-semibold text-zinc-900"
+                  className="inline-flex w-full max-w-[220px] justify-center leading-none sm:flex-1 sm:max-w-none"
+                  aria-label="Télécharger sur Google Play"
                 >
-                  <PlayIcon className="size-4 shrink-0" />
-                  Google Play
+                  <Image
+                    src="/branding/google-play-store-logo-png.webp"
+                    alt=""
+                    width={202}
+                    height={60}
+                    className="h-11 w-auto object-contain sm:h-10"
+                    unoptimized
+                  />
                 </a>
               </div>
             </div>
@@ -157,18 +189,3 @@ function CloseIcon() {
   );
 }
 
-function AppleIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
-    </svg>
-  );
-}
-
-function PlayIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M3 20.5v-17c0-.59.47-1.04 1.02-.99l15.97 8.5c.59.31.59 1.17 0 1.48L4.02 21.49A1.02 1.02 0 013 20.5z" />
-    </svg>
-  );
-}
