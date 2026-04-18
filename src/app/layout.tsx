@@ -28,7 +28,7 @@ export default function RootLayout({
       lang="fr"
       className={`${bricolageGrotesque.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#f3f0ff] font-sans">
+      <body className="min-h-full flex flex-col bg-white font-sans">
         <Navbar />
         {children}
       </body>
