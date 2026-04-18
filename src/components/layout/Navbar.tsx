@@ -8,7 +8,7 @@ const BRAND = "#4EA6F5";
 
 /** Taille unique pour tout texte visible de la navbar */
 const NAV_TEXT =
-  "text-base font-medium leading-snug lg:text-lg xl:text-xl";
+  "text-sm font-medium leading-snug lg:text-base xl:text-lg";
 
 const navLinks = [
   { href: "#features", label: "Fonctionnalités" },
@@ -21,10 +21,10 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 px-3 pt-3 font-sans sm:px-5 sm:pt-4 lg:px-8">
+    <header className="sticky top-0 z-50 px-3 pt-2.5 font-sans sm:px-5 sm:pt-3 lg:px-8">
       <nav
         aria-label="Principale"
-        className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-3 rounded-3xl px-3 py-3 text-white sm:px-4 sm:py-3.5 md:rounded-full md:px-4 md:py-4 lg:px-6 lg:py-4"
+        className="mx-auto flex w-full min-w-0 max-w-[71rem] flex-col gap-2.5 rounded-2xl px-3 py-2.5 text-white sm:px-5 sm:py-3 md:rounded-3xl md:py-3 lg:px-8 lg:py-3.5"
         style={{ backgroundColor: BRAND }}
       >
         <div className="flex min-w-0 items-center justify-between gap-2 sm:gap-3 md:gap-4">
@@ -36,13 +36,13 @@ export function Navbar() {
             <Image
               src="/branding/runly.svg"
               alt=""
-              width={64}
-              height={64}
-              className="size-12 shrink-0 object-contain sm:size-14 md:size-16"
+              width={56}
+              height={56}
+              className="size-11 shrink-0 object-contain sm:size-13 md:size-14"
               priority
               unoptimized
             />
-            <span className="truncate tracking-tight text-white text-lg font-semibold leading-snug lg:text-xl xl:text-2xl">
+            <span className="truncate tracking-tight text-white text-base font-semibold leading-snug lg:text-lg xl:text-xl">
               Runly
             </span>
           </Link>
@@ -70,7 +70,7 @@ export function Navbar() {
                 alt=""
                 width={180}
                 height={54}
-                className="h-9 w-auto object-contain object-left sm:h-10"
+                className="h-7 w-auto object-contain object-left sm:h-8"
                 unoptimized
               />
             </a>
@@ -84,7 +84,7 @@ export function Navbar() {
                 alt=""
                 width={202}
                 height={60}
-                className="h-9 w-auto object-contain object-left sm:h-10"
+                className="h-7 w-auto object-contain object-left sm:h-8"
                 unoptimized
               />
             </a>
@@ -92,7 +92,7 @@ export function Navbar() {
 
           <button
             type="button"
-            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-white/50 text-white sm:size-12 md:hidden"
+            className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-white/50 text-white sm:size-11 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
@@ -111,7 +111,7 @@ export function Navbar() {
           }`}
         >
           <div className="min-h-0">
-            <div className="flex flex-col gap-4 border-t border-white/25 pt-4">
+            <div className="flex flex-col gap-3 border-t border-white/25 pt-3">
               <ul className={`flex flex-col gap-1 text-white/90 ${NAV_TEXT}`}>
                 {navLinks.map(({ href, label }) => (
                   <li key={href}>
@@ -136,7 +136,7 @@ export function Navbar() {
                     alt=""
                     width={180}
                     height={54}
-                    className="h-11 w-auto object-contain sm:h-10"
+                    className="h-9 w-auto object-contain sm:h-8"
                     unoptimized
                   />
                 </a>
@@ -150,7 +150,7 @@ export function Navbar() {
                     alt=""
                     width={202}
                     height={60}
-                    className="h-11 w-auto object-contain sm:h-10"
+                    className="h-9 w-auto object-contain sm:h-8"
                     unoptimized
                   />
                 </a>

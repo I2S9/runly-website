@@ -6,7 +6,7 @@ export function HeroSection() {
       className="w-full border-b border-zinc-100 bg-white px-3 pb-16 pt-6 sm:px-5 sm:pb-20 sm:pt-8 lg:px-8 lg:pb-28 lg:pt-10"
       aria-labelledby="hero-heading"
     >
-      <div className="mx-auto flex w-full max-w-6xl flex-col">
+      <div className="mx-auto flex w-full max-w-[71rem] flex-col">
         <div className="max-w-2xl text-left">
           <p className="inline-flex flex-wrap items-center gap-x-1.5 rounded-full border border-[#4EA6F5]/25 bg-white px-4 py-2 text-sm leading-snug text-zinc-600 sm:text-[0.9375rem]">
             <span>Plébiscité par des coureurs</span>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Geist_Mono } from "next/font/google";
+import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import "./globals.css";
 
@@ -16,6 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Runly",
   description: "Runly website",
+  icons: {
+    icon: [{ url: "/branding/runly.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/branding/runly.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({
@@ -31,6 +36,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-white font-sans">
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
