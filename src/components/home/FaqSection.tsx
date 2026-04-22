@@ -52,9 +52,8 @@ export function FaqSection() {
             FAQ
           </h2>
           <p className="mt-3 text-pretty text-base leading-relaxed text-zinc-600 sm:mt-4 sm:text-lg">
-            Tout ce qu’il faut savoir (ou presque) sur Runly. T’as pas la réponse
-            ? Écris-nous, on en discute en mode humain, pas en bot qui récite la
-            doc.
+            Les réponses aux questions qu’on nous pose le plus souvent sur Runly.
+            Une info manque ? Écris-nous, on te répond dès qu’on peut.
           </p>
         </div>
 
