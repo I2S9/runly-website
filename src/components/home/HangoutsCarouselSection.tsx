@@ -162,14 +162,18 @@ function HangoutCardItem({
 }) {
   return (
     <article
-      className="relative w-[min(15rem,70vw)] shrink-0 overflow-hidden rounded-2xl shadow-md ring-1 ring-black/10 sm:w-[16.25rem] md:w-[17rem]"
+      className="group relative w-[min(15rem,70vw)] shrink-0 cursor-pointer overflow-hidden rounded-2xl shadow-md ring-1 ring-black/10 sm:w-[16.25rem] md:w-[17rem]"
       style={{ aspectRatio: "1 / 1" }}
       aria-hidden={ariaHidden}
     >
       <div
-        className={`absolute inset-0 ${item.placeholderClass}`}
+        className="absolute inset-0 overflow-hidden"
         aria-hidden
-      />
+      >
+        <div
+          className={`h-full w-full will-change-transform ${item.placeholderClass} transform-gpu transition-transform duration-500 ease-out group-hover:scale-110`}
+        />
+      </div>
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
         aria-hidden

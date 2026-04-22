@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Runly",
+  title: "Runly | Download Today",
   description: "Runly website",
   icons: {
     icon: [{ url: "/branding/runly.svg", type: "image/svg+xml" }],
