@@ -6,8 +6,8 @@ export function HeroSection() {
       className="w-full border-b border-zinc-100 bg-white px-3 pb-16 pt-6 sm:px-5 sm:pb-20 sm:pt-8 lg:px-8 lg:pb-28 lg:pt-10"
       aria-labelledby="hero-heading"
     >
-      <div className="mx-auto flex w-full max-w-[71rem] flex-col">
-        <div className="max-w-2xl text-left">
+      <div className="mx-auto flex w-full max-w-[71rem] flex-col gap-10 lg:flex-row lg:items-center lg:gap-12 xl:gap-14">
+        <div className="min-w-0 max-w-2xl flex-1 text-left">
           <p className="inline-flex flex-wrap items-center gap-x-1.5 rounded-full border border-[#4EA6F5]/25 bg-white px-4 py-2 text-sm leading-snug text-zinc-600 sm:text-[0.9375rem]">
             <span>Plébiscité par des coureurs</span>
             <span className="text-zinc-400" aria-hidden>
@@ -68,6 +68,19 @@ export function HeroSection() {
                 unoptimized
               />
             </a>
+          </div>
+        </div>
+
+        <div className="relative w-full shrink-0 self-center sm:max-w-md lg:max-w-[min(100%,20rem)] xl:max-w-sm">
+          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl shadow-sm ring-1 ring-zinc-100/80">
+            <Image
+              src="/images/home/running-friends.jpg"
+              alt="Groupe de coureuses en pleine course sur route, souriant."
+              fill
+              className="object-cover object-[50%_82%]"
+              priority
+              sizes="(min-width: 1280px) 24rem, (min-width: 1024px) 20rem, (min-width: 640px) 28rem, 100vw"
+            />
           </div>
         </div>
       </div>

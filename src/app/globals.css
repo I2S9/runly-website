@@ -24,3 +24,25 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
+
+/* Carrousel “sessions” : boucle, la distance est pilotée en px via --hangouts-dx */
+@keyframes hangouts-infinite {
+  to {
+    transform: translate3d(calc(-1 * var(--hangouts-dx, 0px)), 0, 0);
+  }
+}
+
+.hangouts-marquee {
+  will-change: transform;
+  animation: hangouts-infinite 55s linear infinite;
+}
+
+.hangouts-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hangouts-marquee {
+    animation: none;
+  }
+}
