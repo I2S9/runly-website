@@ -1,23 +1,6 @@
-const FAQ_ITEMS: { q: string; a: string }[] = [
-  {
-    q: "C’est dangereux de retrouver des gens via Runly pour aller courir ?",
-    a: "On te propose de matcher avec des profils vérifiés, de partir sur des parcours fréquentés, et surtout de ne jamais partager d’adresse perso en premier message. T’as l’esprit tranquille, les mollets serrés à part.",
-  },
-  {
-    q: "Runly, c’est gratuit ou je vais claquer le PEL ?",
-    a: "L’appli, le matching et le petit planning de sorties, c’est sans sous. Certains brols premium peuvent arriver plus tard, mais l’idée, c’est que tout le monde puisse s’enjailler un minimum sans cliquer sur « Payer 9,99 € ».",
-  },
-  {
-    q: "Runly, ça marche dans ma cambrousse / ma grande ville ?",
-    a: "On s’agrandit doucement. Tant qu’y a assez de coureurs inscrits près de chez toi, t’as des propositions. Sinon, refile le lien autour de toi : le réseau, ça s’bâtit en foulées.",
-  },
-  {
-    q: "L’appli balance ma position béton en temps réel ?",
-    a: "Non, on n’envoie pas un GPS mètre par mètre sur la place publique. Tu partages seulement ce que tu valides, et les zones c’est volontairement flou. On est là pour t’aligner, pas pour streamer ton canapé.",
-  },
-];
+import type { Translations } from "@/i18n/translations";
 
-function FaqItem({ item }: { item: (typeof FAQ_ITEMS)[0] }) {
+function FaqItem({ item }: { item: Translations["faq"]["items"][number] }) {
   return (
     <details className="group border-b border-zinc-200 py-4 first:pt-0 last:border-b-0 sm:py-5">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-medium text-zinc-900 outline-offset-2 [&::-webkit-details-marker]:hidden">
@@ -36,7 +19,7 @@ function FaqItem({ item }: { item: (typeof FAQ_ITEMS)[0] }) {
   );
 }
 
-export function FaqSection() {
+export function FaqSection({ tr }: { tr: Translations["faq"] }) {
   return (
     <section
       id="faq"
@@ -49,16 +32,15 @@ export function FaqSection() {
             id="faq-heading"
             className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl"
           >
-            FAQ
+            {tr.heading}
           </h2>
           <p className="mt-3 text-pretty text-base leading-relaxed text-zinc-600 sm:mt-4 sm:text-lg">
-            Les réponses aux questions qu’on nous pose le plus souvent sur Runly.
-            Une info manque ? Écris-nous, on te répond dès qu’on peut.
+            {tr.intro}
           </p>
         </div>
 
         <div>
-          {FAQ_ITEMS.map((item) => (
+          {tr.items.map((item) => (
             <FaqItem key={item.q} item={item} />
           ))}
         </div>

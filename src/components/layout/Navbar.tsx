@@ -3,27 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import type { Translations } from "@/i18n/translations";
 
 const BRAND = "#4EA6F5";
 
-/** Taille unique pour tout texte visible de la navbar */
-const NAV_TEXT =
-  "text-sm font-medium leading-snug lg:text-base xl:text-lg";
+const NAV_TEXT = "text-sm font-medium leading-snug lg:text-base xl:text-lg";
 
-const navLinks = [
-  { href: "#features", label: "Fonctionnalités" },
-  { href: "#rating", label: "Avis" },
-  { href: "#contact", label: "Contact" },
-  { href: "#about", label: "À propos" },
-] as const;
-
-export function Navbar() {
+export function Navbar({ tr }: { tr: Translations["navbar"] }) {
   const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 px-3 pt-2.5 font-sans sm:px-5 sm:pt-3 lg:px-8">
       <nav
-        aria-label="Principale"
+        aria-label={tr.ariaLabel}
         className="mx-auto flex w-full min-w-0 max-w-[71rem] flex-col gap-2.5 rounded-2xl px-3 py-2.5 text-white sm:px-5 sm:py-3 md:rounded-3xl md:py-3 lg:px-8 lg:py-3.5"
         style={{ backgroundColor: BRAND }}
       >
@@ -50,7 +42,7 @@ export function Navbar() {
           <ul
             className={`hidden min-w-0 items-center justify-center gap-3 text-white/90 md:flex md:gap-4 lg:gap-6 xl:gap-8 ${NAV_TEXT}`}
           >
-            {navLinks.map(({ href, label }) => (
+            {tr.links.map(({ href, label }) => (
               <li key={href} className="shrink-0">
                 <Link href={href} className="text-white/90">
                   {label}
@@ -63,7 +55,7 @@ export function Navbar() {
             <a
               href="#"
               className="inline-flex leading-none"
-              aria-label="Télécharger sur l’App Store"
+              aria-label={tr.downloadAppStore}
             >
               <Image
                 src="/branding/get-it-on-apple.png"
@@ -77,7 +69,7 @@ export function Navbar() {
             <a
               href="#"
               className="inline-flex leading-none"
-              aria-label="Télécharger sur Google Play"
+              aria-label={tr.downloadGooglePlay}
             >
               <Image
                 src="/branding/google-play-store-logo-png.webp"
@@ -98,7 +90,7 @@ export function Navbar() {
             onClick={() => setOpen((v) => !v)}
           >
             <span className="sr-only">
-              {open ? "Fermer le menu" : "Ouvrir le menu"}
+              {open ? tr.closeMenu : tr.openMenu}
             </span>
             {open ? <CloseIcon /> : <MenuIcon />}
           </button>
@@ -113,7 +105,7 @@ export function Navbar() {
           <div className="min-h-0">
             <div className="flex flex-col gap-3 border-t border-white/25 pt-3">
               <ul className={`flex flex-col gap-1 text-white/90 ${NAV_TEXT}`}>
-                {navLinks.map(({ href, label }) => (
+                {tr.links.map(({ href, label }) => (
                   <li key={href}>
                     <Link
                       href={href}
@@ -129,7 +121,7 @@ export function Navbar() {
                 <a
                   href="#"
                   className="inline-flex w-full max-w-[220px] justify-center leading-none sm:flex-1 sm:max-w-none"
-                  aria-label="Télécharger sur l’App Store"
+                  aria-label={tr.downloadAppStore}
                 >
                   <Image
                     src="/branding/get-it-on-apple.png"
@@ -143,7 +135,7 @@ export function Navbar() {
                 <a
                   href="#"
                   className="inline-flex w-full max-w-[220px] justify-center leading-none sm:flex-1 sm:max-w-none"
-                  aria-label="Télécharger sur Google Play"
+                  aria-label={tr.downloadGooglePlay}
                 >
                   <Image
                     src="/branding/google-play-store-logo-png.webp"
@@ -188,4 +180,3 @@ function CloseIcon() {
     </svg>
   );
 }
-

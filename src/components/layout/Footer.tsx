@@ -1,23 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Translations } from "@/i18n/translations";
 
 const BRAND = "#4EA6F5";
 
-const aboutLinks = [
-  { href: "#careers", label: "Carrières" },
-  { href: "#blog", label: "Blog" },
-  { href: "#download-ios", label: "Téléchargement iOS" },
-  { href: "#download-android", label: "Téléchargement Android" },
-] as const;
+export function Footer({ tr }: { tr: Translations["footer"] }) {
+  const year = new Date().getFullYear();
 
-const infoLinks = [
-  { href: "#cgu", label: "Conditions générales" },
-  { href: "#confidentialite", label: "Politique de confidentialité" },
-  { href: "#securite", label: "Conseils de sécurité" },
-  { href: "#communaute", label: "Charte de la communauté" },
-] as const;
-
-export function Footer() {
   return (
     <footer className="mt-auto px-3 pb-3 pt-2 font-sans sm:px-5 sm:pb-4 sm:pt-3 lg:px-8">
       <div
@@ -44,8 +33,7 @@ export function Footer() {
                 </span>
               </Link>
               <p className="mt-3 text-sm leading-relaxed text-white/90 sm:text-[0.9375rem]">
-                Trouvez des partenaires de course au même niveau que vous et
-                progressez ensemble.
+                {tr.tagline}
               </p>
             </div>
           </div>
@@ -56,15 +44,12 @@ export function Footer() {
                 id="footer-about"
                 className="text-base font-bold leading-none tracking-tight sm:text-lg"
               >
-                À propos
+                {tr.aboutTitle}
               </h2>
               <ul className="mt-4 flex flex-col gap-3 text-sm sm:mt-5 sm:text-[0.9375rem]">
-                {aboutLinks.map(({ href, label }) => (
+                {tr.aboutLinks.map(({ href, label }) => (
                   <li key={href}>
-                    <Link
-                      href={href}
-                      className="text-white/90 transition hover:text-white"
-                    >
+                    <Link href={href} className="text-white/90 transition hover:text-white">
                       {label}
                     </Link>
                   </li>
@@ -77,15 +62,12 @@ export function Footer() {
                 id="footer-info"
                 className="text-base font-bold leading-none tracking-tight sm:text-lg"
               >
-                Infos
+                {tr.infoTitle}
               </h2>
               <ul className="mt-4 flex flex-col gap-3 text-sm sm:mt-5 sm:text-[0.9375rem]">
-                {infoLinks.map(({ href, label }) => (
+                {tr.infoLinks.map(({ href, label }) => (
                   <li key={href}>
-                    <Link
-                      href={href}
-                      className="text-white/90 transition hover:text-white"
-                    >
+                    <Link href={href} className="text-white/90 transition hover:text-white">
                       {label}
                     </Link>
                   </li>
@@ -96,7 +78,7 @@ export function Footer() {
         </div>
 
         <p className="-mt-3 text-xs leading-none text-white/85 sm:-mt-4 sm:text-sm">
-          © 2026 Runly. Tous droits réservés.
+          {tr.copyright(year)}
         </p>
       </div>
     </footer>

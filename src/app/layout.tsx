@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { getLocale } from "@/lib/locale";
+import { t } from "@/i18n/translations";
 import "./globals.css";
 
 const bricolageGrotesque = Bricolage_Grotesque({
@@ -23,20 +25,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const tr = t(locale);
+
   return (
     <html
-      lang="fr"
+      lang={locale}
       className={`${bricolageGrotesque.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white font-sans">
-        <Navbar />
+        <Navbar tr={tr.navbar} />
         {children}
-        <Footer />
+        <Footer tr={tr.footer} />
       </body>
     </html>
   );
