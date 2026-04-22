@@ -16,7 +16,7 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
     <header className="sticky top-0 z-50 px-3 pt-2.5 font-sans sm:px-5 sm:pt-3 lg:px-8">
       <nav
         aria-label={tr.ariaLabel}
-        className="mx-auto flex w-full min-w-0 max-w-[71rem] flex-col gap-2.5 rounded-2xl px-3 py-2.5 text-white sm:px-5 sm:py-3 md:rounded-3xl md:py-3 lg:px-8 lg:py-3.5"
+        className="mx-auto flex w-full min-w-0 max-w-[71rem] flex-col rounded-2xl px-3 py-2.5 text-white sm:px-5 sm:py-3 md:rounded-3xl md:py-3 lg:px-8 lg:py-3.5"
         style={{ backgroundColor: BRAND }}
       >
         <div className="flex min-w-0 items-center justify-between gap-2 sm:gap-3 md:gap-4">
@@ -84,7 +84,7 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
 
           <button
             type="button"
-            className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-white/50 text-white sm:size-11 md:hidden"
+            className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-white text-[#4EA6F5] sm:size-11 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
@@ -99,17 +99,17 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
         <div
           id="mobile-nav"
           className={`grid overflow-hidden transition-[grid-template-rows] duration-200 ease-out md:hidden ${
-            open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+            open ? "mt-2.5 grid-rows-[1fr]" : "grid-rows-[0fr]"
           }`}
         >
           <div className="min-h-0">
-            <div className="flex flex-col gap-3 border-t border-white/25 pt-3">
-              <ul className={`flex flex-col gap-1 text-white/90 ${NAV_TEXT}`}>
+            <div className="flex flex-col items-center gap-3 border-t border-white/25 pt-3 text-center">
+              <ul className={`flex w-full flex-col items-center gap-1 text-white/90 ${NAV_TEXT}`}>
                 {tr.links.map(({ href, label }) => (
                   <li key={href}>
                     <Link
                       href={href}
-                      className="flex min-h-12 items-center py-2 text-white/90 sm:min-h-14 sm:py-2.5"
+                      className="flex min-h-12 items-center justify-center py-2 text-white/90 sm:min-h-14 sm:py-2.5"
                       onClick={() => setOpen(false)}
                     >
                       {label}
@@ -117,10 +117,10 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col items-center gap-3 pb-1 sm:flex-row sm:flex-wrap sm:justify-center">
+              <div className="flex flex-col items-center gap-3 pb-1">
                 <a
                   href="#"
-                  className="inline-flex w-full max-w-[220px] justify-center leading-none sm:flex-1 sm:max-w-none"
+                  className="inline-flex leading-none"
                   aria-label={tr.downloadAppStore}
                 >
                   <Image
@@ -128,13 +128,13 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
                     alt=""
                     width={180}
                     height={54}
-                    className="h-9 w-auto object-contain sm:h-8"
+                    className="h-9 w-auto object-contain"
                     unoptimized
                   />
                 </a>
                 <a
                   href="#"
-                  className="inline-flex w-full max-w-[220px] justify-center leading-none sm:flex-1 sm:max-w-none"
+                  className="inline-flex leading-none"
                   aria-label={tr.downloadGooglePlay}
                 >
                   <Image
@@ -142,7 +142,7 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
                     alt=""
                     width={202}
                     height={60}
-                    className="h-9 w-auto object-contain sm:h-8"
+                    className="h-9 w-auto object-contain"
                     unoptimized
                   />
                 </a>

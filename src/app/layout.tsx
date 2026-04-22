@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
@@ -15,6 +15,12 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "Runly | Download Today",
@@ -36,7 +42,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${bricolageGrotesque.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${bricolageGrotesque.variable} ${geistMono.variable} h-full bg-white antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white font-sans">
         <Navbar tr={tr.navbar} />

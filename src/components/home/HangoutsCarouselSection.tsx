@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { Translations } from "@/i18n/translations";
 
 const PLACEHOLDER_CLASSES = [
@@ -120,7 +120,7 @@ export function HangoutsCarouselSection({
   const trackRef = useRef<HTMLDivElement>(null);
   const [dx, setDx] = useState(0);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
@@ -139,7 +139,7 @@ export function HangoutsCarouselSection({
 
   return (
     <section
-      className="w-full border-b border-zinc-100 bg-zinc-50/80 py-12 sm:py-16 lg:py-20"
+      className="w-full border-b border-zinc-100 bg-zinc-50 py-12 sm:py-16 lg:py-20"
       aria-labelledby="hangouts-heading"
     >
       <div className="mx-auto w-full max-w-[71rem] px-3 text-center sm:px-5 lg:px-8">
