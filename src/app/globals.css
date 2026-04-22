@@ -25,7 +25,7 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/* Carrousel “sessions” : boucle, la distance est pilotée en px via --hangouts-dx */
+/* Carrousel “sessions” : défilement vers la gauche, boucle via --hangouts-dx (px) */
 @keyframes hangouts-infinite {
   to {
     transform: translate3d(calc(-1 * var(--hangouts-dx, 0px)), 0, 0);
@@ -34,7 +34,7 @@ body {
 
 .hangouts-marquee {
   will-change: transform;
-  animation: hangouts-infinite 55s linear infinite;
+  animation: hangouts-infinite 38s linear infinite;
 }
 
 .hangouts-marquee:hover {

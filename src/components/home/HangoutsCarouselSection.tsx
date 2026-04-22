@@ -66,6 +66,69 @@ const HANGOUTS: HangoutCard[] = [
       "bg-gradient-to-br from-emerald-900/75 via-slate-800 to-neutral-950",
     avatarTints: ["bg-stone-200", "bg-blue-200", "bg-green-200", "bg-amber-200"],
   },
+  {
+    title: "Retour pépère après l’heure du dîner",
+    place: "Bordeaux, France",
+    flag: "🇫🇷",
+    participants: "67+",
+    placeholderClass:
+      "bg-gradient-to-br from-rose-900/70 via-zinc-800 to-stone-950",
+    avatarTints: ["bg-orange-200", "bg-rose-200", "bg-violet-200", "bg-zinc-100"],
+  },
+  {
+    title: "C’est pas l’Kms c’est l’Kiffe",
+    place: "Marseille, France",
+    flag: "🇫🇷",
+    participants: "94+",
+    placeholderClass:
+      "bg-gradient-to-br from-cyan-900/75 via-slate-800 to-zinc-950",
+    avatarTints: ["bg-amber-200", "bg-sky-200", "bg-lime-200", "bg-white"],
+  },
+  {
+    title: "Les quadriceps en PLS du lundi",
+    place: "Nantes, France",
+    flag: "🇫🇷",
+    participants: "41+",
+    placeholderClass:
+      "bg-gradient-to-br from-slate-800 via-indigo-900/50 to-zinc-950",
+    avatarTints: ["bg-fuchsia-200", "bg-cyan-200", "bg-yellow-200", "bg-slate-200"],
+  },
+  {
+    title: "Run du désespoir avant la pesée",
+    place: "Nice, France",
+    flag: "🇫🇷",
+    participants: "28+",
+    placeholderClass:
+      "bg-gradient-to-br from-sky-900/70 via-neutral-800 to-slate-950",
+    avatarTints: ["bg-pink-200", "bg-indigo-200", "bg-emerald-200", "bg-amber-100"],
+  },
+  {
+    title: "Le club des ventres à l’ancienne",
+    place: "Bruxelles, Belgique",
+    flag: "🇧🇪",
+    participants: "33+",
+    placeholderClass:
+      "bg-gradient-to-br from-amber-900/70 via-stone-800 to-neutral-950",
+    avatarTints: ["bg-rose-100", "bg-blue-200", "bg-orange-200", "bg-lime-100"],
+  },
+  {
+    title: "Trotinette en mode traque (interdit de voler l’eau)",
+    place: "Strasbourg, France",
+    flag: "🇫🇷",
+    participants: "19+",
+    placeholderClass:
+      "bg-gradient-to-br from-fuchsia-900/65 via-zinc-800 to-neutral-900",
+    avatarTints: ["bg-cyan-200", "bg-amber-200", "bg-rose-300", "bg-white"],
+  },
+  {
+    title: "Grimpe ton escalier avant le 10 km (promis ça pique)",
+    place: "Grenoble, France",
+    flag: "🇫🇷",
+    participants: "55+",
+    placeholderClass:
+      "bg-gradient-to-br from-slate-700 via-cyan-900/50 to-zinc-950",
+    avatarTints: ["bg-amber-200", "bg-violet-200", "bg-green-200", "bg-zinc-200"],
+  },
 ];
 
 const LOOP = [...HANGOUTS, ...HANGOUTS];
@@ -100,7 +163,7 @@ function HangoutCardItem({
   return (
     <article
       className="relative w-[min(15rem,70vw)] shrink-0 overflow-hidden rounded-2xl shadow-md ring-1 ring-black/10 sm:w-[16.25rem] md:w-[17rem]"
-      style={{ aspectRatio: "5 / 6" }}
+      style={{ aspectRatio: "1 / 1" }}
       aria-hidden={ariaHidden}
     >
       <div
