@@ -8,18 +8,28 @@ export function HeroSection() {
     >
       <div className="mx-auto flex w-full max-w-[71rem] flex-col gap-10 lg:flex-row lg:items-center lg:gap-12 xl:gap-14">
         <div className="min-w-0 max-w-2xl flex-1 text-left">
-          <p className="inline-flex flex-wrap items-center gap-x-1.5 rounded-full border border-[#4EA6F5]/25 bg-white px-4 py-2 text-sm leading-snug text-zinc-600 sm:text-[0.9375rem]">
-            <span>Plébiscité par des coureurs</span>
-            <span className="text-zinc-400" aria-hidden>
-              ·
+          <p className="inline-flex flex-wrap items-center gap-x-2 gap-y-1.5 rounded-full border border-zinc-200 bg-white px-4 py-2.5 text-sm leading-snug text-zinc-800 sm:text-[0.9375rem]">
+            <span className="inline-flex min-w-0 items-center gap-1.5">
+              <span
+                className="text-base leading-none sm:text-lg"
+                aria-hidden
+              >
+                ⭐
+              </span>
+              <span className="whitespace-nowrap font-semibold tabular-nums text-zinc-900">
+                4,9/5
+              </span>
             </span>
-            <span>
-              note{" "}
-              <span className="font-semibold text-[#4EA6F5]">4,9</span>
+            <span
+              className="h-1 w-1 shrink-0 rounded-full bg-[#4EA6F5]/45"
+              aria-hidden
+            />
+            <span className="min-w-0 text-zinc-600">
+              Recommandé par des coureurs
             </span>
           </p>
 
-          <p className="mt-8 text-lg font-semibold text-[#4EA6F5] sm:mt-10 sm:text-xl">
+          <p className="mt-3 text-lg font-semibold text-[#4EA6F5] sm:mt-3.5 sm:text-xl">
             Découvrez Runly
           </p>
 
