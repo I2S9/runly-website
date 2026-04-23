@@ -30,7 +30,7 @@ export function FaqSection({ tr }: { tr: Translations["faq"] }) {
         <div className="max-w-md lg:pt-0">
           <h2
             id="faq-heading"
-            className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl"
+            className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl md:text-4xl"
           >
             {tr.heading}
           </h2>

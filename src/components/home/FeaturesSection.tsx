@@ -34,34 +34,30 @@ const ICONS = [
 
 export function FeaturesSection({ tr }: { tr: Translations["features"] }) {
   return (
-    <section className="w-full bg-white px-3 pt-3 pb-8 sm:px-5 sm:pt-4 sm:pb-10 lg:px-8 lg:pt-5 lg:pb-12">
+    <section className="w-full bg-white px-3 pt-3 pb-10 sm:px-5 sm:pt-4 sm:pb-12 lg:px-8 lg:pt-5 lg:pb-14">
       <div className="mx-auto w-full max-w-[82rem]">
-        <div className="overflow-hidden rounded-2xl sm:rounded-3xl">
-          <div className="grid grid-cols-1 gap-px bg-zinc-100 sm:grid-cols-2 lg:grid-cols-4">
-            {tr.items.map((item, i) => (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+          {tr.items.map((item, i) => (
+            <div
+              key={item.title}
+              className="flex items-start gap-5 rounded-2xl bg-zinc-50 p-6 sm:p-7 lg:p-7"
+            >
               <div
-                key={item.title}
-                className="flex items-start gap-5 bg-white p-6 sm:p-7 lg:p-8"
+                className="mt-0.5 flex h-13 w-13 shrink-0 items-center justify-center rounded-full"
+                style={{ backgroundColor: "rgba(78,166,245,0.12)", color: BRAND }}
               >
-                {/* Circle — 52 px */}
-                <div
-                  className="mt-0.5 flex h-13 w-13 shrink-0 items-center justify-center rounded-full"
-                  style={{ backgroundColor: "rgba(78,166,245,0.12)", color: BRAND }}
-                >
-                  {ICONS[i]}
-                </div>
-
-                <div>
-                  <h3 className="text-base font-semibold leading-snug text-zinc-900 sm:text-lg">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-[0.9375rem] leading-relaxed text-zinc-500 sm:text-base">
-                    {item.description}
-                  </p>
-                </div>
+                {ICONS[i]}
               </div>
-            ))}
-          </div>
+              <div>
+                <h3 className="text-base font-semibold leading-snug text-zinc-900 sm:text-lg">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-500 sm:text-base">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

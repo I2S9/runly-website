@@ -58,7 +58,7 @@ export function CommunityBanner({ tr }: { tr: Translations["communityBanner"] })
 
           {/* Content — right on desktop, bottom on mobile */}
           <div className="flex flex-col justify-start px-6 py-10 sm:px-10 sm:py-12 lg:w-[48%] lg:px-10 lg:py-14">
-            <h2 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl lg:text-[2.6rem] lg:leading-[1.1]">
+            <h2 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl md:text-4xl">
               {tr.heading}
               <br />
               <span style={{ color: BRAND }}>{tr.headingAccent}</span>

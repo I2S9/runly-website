@@ -32,10 +32,9 @@ export function PreFooterSection({ tr }: { tr: Translations["stats"] }) {
   return (
     <section className="w-full bg-white px-3 py-8 sm:px-5 sm:py-10 lg:px-8 lg:py-12">
       <div className="mx-auto w-full max-w-[82rem]">
-        <div className="overflow-hidden rounded-2xl border border-zinc-100 sm:rounded-3xl">
-          <div className="grid grid-cols-2 gap-px bg-zinc-100 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
             {tr.map((stat, i) => (
-              <div key={stat.label} className="flex items-center gap-4 bg-white p-5 sm:p-6 lg:p-8">
+              <div key={stat.label} className="flex items-center gap-4 rounded-2xl bg-zinc-50 p-5 sm:p-6 lg:p-8">
                 <div
                   className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
                   style={{ backgroundColor: "rgba(78,166,245,0.12)" }}
@@ -50,7 +49,6 @@ export function PreFooterSection({ tr }: { tr: Translations["stats"] }) {
                 </div>
               </div>
             ))}
-          </div>
         </div>
       </div>
     </section>
