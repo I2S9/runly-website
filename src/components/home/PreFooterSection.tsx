@@ -34,7 +34,7 @@ export function PreFooterSection({ tr }: { tr: Translations["stats"] }) {
       <div className="mx-auto w-full max-w-[82rem]">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
             {tr.map((stat, i) => (
-              <div key={stat.label} className="flex items-center gap-4 rounded-2xl bg-zinc-50 p-5 sm:p-6 lg:p-8">
+              <div key={stat.label} className="flex items-center gap-4 p-5 sm:p-6 lg:p-8">
                 <div
                   className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
                   style={{ backgroundColor: "rgba(78,166,245,0.12)" }}

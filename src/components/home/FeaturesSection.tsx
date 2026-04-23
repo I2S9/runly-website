@@ -43,7 +43,7 @@ export function FeaturesSection({ tr }: { tr: Translations["features"] }) {
           {tr.items.map((item, i) => (
             <div
               key={item.title}
-              className="flex items-start gap-4 rounded-2xl bg-zinc-50 p-5 lg:p-6"
+              className="flex items-start gap-4 p-5 lg:p-6"
             >
               <div
                 className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full"
