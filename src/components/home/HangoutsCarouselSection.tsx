@@ -70,7 +70,7 @@ function HangoutCardItem({
 }) {
   return (
     <article
-      className="group relative w-[min(15rem,70vw)] shrink-0 cursor-pointer overflow-hidden rounded-2xl shadow-md ring-1 ring-black/10 sm:w-[16.25rem] md:w-[17rem]"
+      className="group relative w-[min(15rem,70vw)] shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-zinc-900 shadow-md ring-1 ring-black/10 sm:w-[16.25rem] md:w-[17rem]"
       style={{ aspectRatio: "1 / 1" }}
       aria-hidden={ariaHidden}
     >
@@ -80,7 +80,7 @@ function HangoutCardItem({
         />
       </div>
       <div
-        className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
         aria-hidden
       />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-1.5 p-3 sm:p-3.5">

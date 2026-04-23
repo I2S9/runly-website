@@ -77,7 +77,7 @@ export function Footer({ tr }: { tr: Translations["footer"] }) {
           </div>
         </div>
 
-        <p className="-mt-3 text-xs leading-none text-white/85 sm:-mt-4 sm:text-sm">
+        <p className="mt-8 text-xs leading-none text-white/85 sm:mt-6 sm:text-sm">
           {tr.copyright(year)}
         </p>
       </div>
