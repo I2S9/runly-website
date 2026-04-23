@@ -57,7 +57,7 @@ export function HeroSection({
         </div>
 
         {/* Image : paysage sur mobile/tablette, portrait sur desktop */}
-        <div className="relative w-full shrink-0 self-center sm:max-w-sm lg:max-w-[20rem] xl:max-w-[23rem]">
+        <div className="relative w-full shrink-0 self-center sm:max-w-sm lg:max-w-[20rem] xl:max-w-[23rem]" style={{ transform: "rotate(-3deg) translateX(-36px) translateY(24px)" }}>
           <div className="relative w-full overflow-hidden rounded-2xl ring-1 ring-zinc-100/80 aspect-4/3 lg:aspect-3/4">
             <Image
               src="/images/home/running-friends.jpg"

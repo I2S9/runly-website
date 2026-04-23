@@ -19,7 +19,7 @@ const translations = {
       badge: "Recommandé par des coureurs",
       rating: "4,9/5",
       eyebrow: "Découvrez Runly",
-      h1: ["Trouvez des partenaires de running à votre niveau pour progresser", "ensemble"],
+      h1: ["Courez avec les bonnes personnes,", "progressez ensemble"],
       body: "Runly vous met en relation avec des coureurs qui partagent votre allure et vos objectifs, pour vous entraîner ensemble et vous dépasser en toute confiance.",
       downloadAppStore: "Télécharger sur l'App Store",
       downloadGooglePlay: "Télécharger sur Google Play",
