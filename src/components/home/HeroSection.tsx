@@ -39,7 +39,7 @@ export function HeroSection({ tr }: { tr: Translations["hero"] }) {
           <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-9">
             <a href="#" className="inline-flex shrink-0 leading-none" aria-label={tr.downloadAppStore}>
               <Image
-                src="/branding/get-it-on-apple.png"
+                src="/branding/app-store.png"
                 alt=""
                 width={200}
                 height={60}
@@ -50,7 +50,7 @@ export function HeroSection({ tr }: { tr: Translations["hero"] }) {
             </a>
             <a href="#" className="inline-flex shrink-0 leading-none" aria-label={tr.downloadGooglePlay}>
               <Image
-                src="/branding/google-play-store-logo-png.webp"
+                src="/branding/google-play.webp"
                 alt=""
                 width={220}
                 height={66}

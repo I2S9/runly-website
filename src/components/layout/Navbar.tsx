@@ -88,7 +88,7 @@ export function Navbar({
           <div className="hidden shrink-0 items-center gap-3 md:flex lg:gap-4">
             <a href="#" className="inline-flex leading-none" aria-label={tr.downloadAppStore}>
               <Image
-                src="/branding/get-it-on-apple.png"
+                src="/branding/app-store.png"
                 alt=""
                 width={180}
                 height={54}
@@ -98,7 +98,7 @@ export function Navbar({
             </a>
             <a href="#" className="inline-flex leading-none" aria-label={tr.downloadGooglePlay}>
               <Image
-                src="/branding/google-play-store-logo-png.webp"
+                src="/branding/google-play.webp"
                 alt=""
                 width={202}
                 height={60}
@@ -150,7 +150,7 @@ export function Navbar({
               <div className="flex flex-col items-center gap-3 pb-1">
                 <a href="#" className="inline-flex leading-none" aria-label={tr.downloadAppStore}>
                   <Image
-                    src="/branding/get-it-on-apple.png"
+                    src="/branding/app-store.png"
                     alt=""
                     width={180}
                     height={54}
@@ -160,7 +160,7 @@ export function Navbar({
                 </a>
                 <a href="#" className="inline-flex leading-none" aria-label={tr.downloadGooglePlay}>
                   <Image
-                    src="/branding/google-play-store-logo-png.webp"
+                    src="/branding/google-play.webp"
                     alt=""
                     width={202}
                     height={60}
