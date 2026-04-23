@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import type { Translations } from "@/i18n/translations";
+import { DownloadButtons } from "@/components/ui/DownloadButtons";
 
 const BRAND = "#4EA6F5";
 const NAV_TEXT = "text-sm font-medium leading-snug lg:text-base xl:text-lg";
@@ -38,9 +39,11 @@ function LangToggle({ locale }: { locale: string }) {
 
 export function Navbar({
   tr,
+  trModal,
   locale,
 }: {
   tr: Translations["navbar"];
+  trModal: Translations["downloadModal"];
   locale: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -86,26 +89,11 @@ export function Navbar({
 
           {/* Desktop right side: store badges + lang toggle */}
           <div className="hidden shrink-0 items-center gap-3 md:flex lg:gap-4">
-            <a href="#" className="inline-flex leading-none" aria-label={tr.downloadAppStore}>
-              <Image
-                src="/branding/app-store.png"
-                alt=""
-                width={180}
-                height={54}
-                className="h-7 w-auto object-contain object-left sm:h-8"
-                unoptimized
-              />
-            </a>
-            <a href="#" className="inline-flex leading-none" aria-label={tr.downloadGooglePlay}>
-              <Image
-                src="/branding/google-play.webp"
-                alt=""
-                width={202}
-                height={60}
-                className="h-7 w-auto object-contain object-left sm:h-8"
-                unoptimized
-              />
-            </a>
+            <DownloadButtons
+              tr={{ downloadAppStore: tr.downloadAppStore, downloadGooglePlay: tr.downloadGooglePlay, downloadModal: trModal }}
+              size="sm"
+              layout="row"
+            />
             <LangToggle locale={locale} />
           </div>
 
@@ -148,26 +136,11 @@ export function Navbar({
                 ))}
               </ul>
               <div className="flex flex-col items-center gap-3 pb-1">
-                <a href="#" className="inline-flex leading-none" aria-label={tr.downloadAppStore}>
-                  <Image
-                    src="/branding/app-store.png"
-                    alt=""
-                    width={180}
-                    height={54}
-                    className="h-9 w-auto object-contain"
-                    unoptimized
-                  />
-                </a>
-                <a href="#" className="inline-flex leading-none" aria-label={tr.downloadGooglePlay}>
-                  <Image
-                    src="/branding/google-play.webp"
-                    alt=""
-                    width={202}
-                    height={60}
-                    className="h-9 w-auto object-contain"
-                    unoptimized
-                  />
-                </a>
+                <DownloadButtons
+                  tr={{ downloadAppStore: tr.downloadAppStore, downloadGooglePlay: tr.downloadGooglePlay, downloadModal: trModal }}
+                  size="lg"
+                  layout="col"
+                />
               </div>
             </div>
           </div>

@@ -128,6 +128,11 @@ const translations = {
       copyright: (year: number) => `© ${year} Runly. Tous droits réservés.`,
       navAriaLabel: "Infos légales et communauté",
     },
+    downloadModal: {
+      title: "Bientôt disponible",
+      message: "Runly arrive très bientôt. Reste connecté, ça va déchirer !",
+      close: "Fermer",
+    },
   },
 
   en: {
@@ -256,6 +261,11 @@ const translations = {
       ],
       copyright: (year: number) => `© ${year} Runly. All rights reserved.`,
       navAriaLabel: "Legal and community info",
+    },
+    downloadModal: {
+      title: "Coming Soon",
+      message: "Runly is coming very soon. Stay tuned, it's going to be great!",
+      close: "Close",
     },
   },
 } as const;

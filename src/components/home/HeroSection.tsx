@@ -1,7 +1,14 @@
 import Image from "next/image";
 import type { Translations } from "@/i18n/translations";
+import { DownloadButtons } from "@/components/ui/DownloadButtons";
 
-export function HeroSection({ tr }: { tr: Translations["hero"] }) {
+export function HeroSection({
+  tr,
+  trModal,
+}: {
+  tr: Translations["hero"];
+  trModal: Translations["downloadModal"];
+}) {
   return (
     <section
       className="w-full border-b border-zinc-100 bg-white px-3 pb-14 pt-5 sm:px-5 sm:pb-20 sm:pt-7 lg:px-8 lg:pb-28 lg:pt-6"
@@ -36,29 +43,16 @@ export function HeroSection({ tr }: { tr: Translations["hero"] }) {
             {tr.body}
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-9">
-            <a href="#" className="inline-flex shrink-0 leading-none" aria-label={tr.downloadAppStore}>
-              <Image
-                src="/branding/app-store.png"
-                alt=""
-                width={200}
-                height={60}
-                className="h-10 w-auto object-contain object-left sm:h-12"
-                priority
-                unoptimized
-              />
-            </a>
-            <a href="#" className="inline-flex shrink-0 leading-none" aria-label={tr.downloadGooglePlay}>
-              <Image
-                src="/branding/google-play.webp"
-                alt=""
-                width={220}
-                height={66}
-                className="h-10 w-auto object-contain object-left sm:h-12"
-                priority
-                unoptimized
-              />
-            </a>
+          <div className="mt-7 sm:mt-9">
+            <DownloadButtons
+              tr={{
+                downloadAppStore: tr.downloadAppStore,
+                downloadGooglePlay: tr.downloadGooglePlay,
+                downloadModal: trModal,
+              }}
+              size="lg"
+              layout="row"
+            />
           </div>
         </div>
 

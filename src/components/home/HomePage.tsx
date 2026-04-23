@@ -14,7 +14,7 @@ export async function HomePage() {
   return (
     <div className="flex flex-1 flex-col font-sans">
       <main className="flex w-full flex-1 flex-col">
-        <HeroSection tr={tr.hero} />
+        <HeroSection tr={tr.hero} trModal={tr.downloadModal} />
         <FeaturesSection tr={tr.features} />
         <HangoutsCarouselSection tr={tr.carousel} />
         <CommunityBanner tr={tr.communityBanner} />
