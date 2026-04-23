@@ -4,7 +4,7 @@ import type { Translations } from "@/i18n/translations";
 export function HeroSection({ tr }: { tr: Translations["hero"] }) {
   return (
     <section
-      className="w-full border-b border-zinc-100 bg-white px-3 pb-14 pt-5 sm:px-5 sm:pb-20 sm:pt-7 lg:px-8 lg:pb-28 lg:pt-8"
+      className="w-full border-b border-zinc-100 bg-white px-3 pb-14 pt-5 sm:px-5 sm:pb-20 sm:pt-7 lg:px-8 lg:pb-28 lg:pt-3"
       aria-labelledby="hero-heading"
     >
       <div className="mx-auto flex w-full max-w-[82rem] flex-col gap-8 lg:flex-row lg:items-center lg:gap-12 xl:gap-14">
@@ -63,7 +63,7 @@ export function HeroSection({ tr }: { tr: Translations["hero"] }) {
         </div>
 
         {/* Image : paysage sur mobile/tablette, portrait sur desktop */}
-        <div className="relative w-full shrink-0 self-center sm:max-w-sm lg:max-w-[26rem] xl:max-w-[30rem]">
+        <div className="relative w-full shrink-0 self-center sm:max-w-sm lg:max-w-[20rem] xl:max-w-[23rem]">
           <div className="relative w-full overflow-hidden rounded-2xl ring-1 ring-zinc-100/80 aspect-4/3 lg:aspect-3/4">
             <Image
               src="/images/home/running-friends.jpg"

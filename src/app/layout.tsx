@@ -26,8 +26,11 @@ export const metadata: Metadata = {
   title: "Runly | Download Today",
   description: "Runly website",
   icons: {
-    icon: [{ url: "/branding/runly.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/branding/runly.svg", type: "image/svg+xml" }],
+    icon: [
+      { url: "/branding/runly.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/branding/runly.svg",
+    apple: "/branding/runly.svg",
   },
 };
 
