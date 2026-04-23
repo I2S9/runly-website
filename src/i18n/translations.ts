@@ -75,6 +75,11 @@ const translations = {
         { value: "1 200+", label: "Sessions / mois" },
         { value: "350+", label: "Clubs actifs" },
       ],
+      testimonial: {
+        quote: "Grâce à Runly, j'ai trouvé des partenaires motivés et je me suis vraiment dépassé. Chaque sortie est un plaisir !",
+        author: "Lucas, 24 ans",
+        meta: "Paris",
+      },
     },
     faq: {
       heading: "FAQ",
@@ -199,6 +204,11 @@ const translations = {
         { value: "1,200+", label: "Sessions / month" },
         { value: "350+", label: "Active clubs" },
       ],
+      testimonial: {
+        quote: "Thanks to Runly, I found motivated partners and really pushed myself. Every run is a pleasure!",
+        author: "Lucas, 24",
+        meta: "Paris",
+      },
     },
     faq: {
       heading: "FAQ",

@@ -30,7 +30,7 @@ const StatIcons = [
 
 export function PreFooterSection({ tr }: { tr: Translations["stats"] }) {
   return (
-    <section className="w-full bg-white px-3 py-8 sm:px-5 sm:py-10 lg:px-8 lg:py-12">
+    <section className="w-full bg-white px-3 py-10 sm:px-5 sm:py-12 lg:px-8 lg:py-14">
       <div className="mx-auto w-full max-w-[82rem]">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
             {tr.map((stat, i) => (

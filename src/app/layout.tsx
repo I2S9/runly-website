@@ -22,17 +22,23 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export const metadata: Metadata = {
-  title: "Runly | Download Today",
-  description: "Runly website",
-  icons: {
-    icon: [
-      { url: "/branding/runly.svg", type: "image/svg+xml" },
-    ],
-    shortcut: "/branding/runly.svg",
-    apple: "/branding/runly.svg",
-  },
+const ICONS = {
+  icon: [{ url: "/branding/runly.svg", type: "image/svg+xml" }],
+  shortcut: "/branding/runly.svg",
+  apple: "/branding/runly.svg",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return {
+    title: locale === "fr" ? "Runly | Télécharge maintenant" : "Runly | Download Today",
+    description:
+      locale === "fr"
+        ? "Runly – trouve ton partenaire de running et progresse ensemble."
+        : "Runly – find your running partner and progress together.",
+    icons: ICONS,
+  };
+}
 
 export default async function RootLayout({
   children,

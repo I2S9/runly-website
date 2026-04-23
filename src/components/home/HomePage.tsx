@@ -1,4 +1,4 @@
-import { CommunityBanner } from "@/components/home/CommunityBanner";
+import { CommunityBanner, TestimonialBand } from "@/components/home/CommunityBanner";
 import { FaqSection } from "@/components/home/FaqSection";
 import { FeaturesSection } from "@/components/home/FeaturesSection";
 import { HangoutsCarouselSection } from "@/components/home/HangoutsCarouselSection";
@@ -19,6 +19,7 @@ export async function HomePage() {
         <HangoutsCarouselSection tr={tr.carousel} />
         <CommunityBanner tr={tr.communityBanner} />
         <FaqSection tr={tr.faq} />
+        <TestimonialBand tr={tr.communityBanner.testimonial} />
         <PreFooterSection tr={tr.stats} />
       </main>
     </div>
