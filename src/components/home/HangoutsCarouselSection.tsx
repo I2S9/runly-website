@@ -139,13 +139,13 @@ export function HangoutsCarouselSection({
 
   return (
     <section
-      className="w-full border-b border-zinc-100 bg-zinc-50 py-12 sm:py-16 lg:py-20"
+      className="w-full bg-white pt-12 pb-2 sm:pt-16 sm:pb-3 lg:pt-20 lg:pb-3"
       aria-labelledby="hangouts-heading"
     >
       <div className="mx-auto w-full max-w-[71rem] px-3 text-center sm:px-5 lg:px-8">
         <h2
           id="hangouts-heading"
-          className="text-balance text-2xl font-bold lowercase tracking-tight text-zinc-900 sm:text-3xl md:text-4xl"
+          className="text-balance text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl md:text-4xl"
         >
           {tr.heading}
         </h2>

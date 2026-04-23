@@ -6,20 +6,54 @@ import { useState } from "react";
 import type { Translations } from "@/i18n/translations";
 
 const BRAND = "#4EA6F5";
-
 const NAV_TEXT = "text-sm font-medium leading-snug lg:text-base xl:text-lg";
 
-export function Navbar({ tr }: { tr: Translations["navbar"] }) {
+function switchLocale(locale: string) {
+  document.cookie = `locale=${locale}; max-age=${60 * 60 * 24 * 365}; path=/; samesite=lax`;
+  window.location.reload();
+}
+
+function LangToggle({ locale }: { locale: string }) {
+  return (
+    <div className="flex items-center rounded-full bg-white/20 p-0.5 text-xs font-semibold tracking-wide">
+      {(["fr", "en"] as const).map((l) => (
+        <button
+          key={l}
+          type="button"
+          onClick={() => l !== locale && switchLocale(l)}
+          className={[
+            "rounded-full px-2.5 py-1 uppercase transition-colors duration-150",
+            l === locale
+              ? "bg-white text-[#4EA6F5]"
+              : "text-white/80 hover:text-white cursor-pointer",
+          ].join(" ")}
+          aria-current={l === locale ? "true" : undefined}
+        >
+          {l}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export function Navbar({
+  tr,
+  locale,
+}: {
+  tr: Translations["navbar"];
+  locale: string;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 px-3 pt-2.5 font-sans sm:px-5 sm:pt-3 lg:px-8">
       <nav
         aria-label={tr.ariaLabel}
-        className="mx-auto flex w-full min-w-0 max-w-[71rem] flex-col rounded-2xl px-3 py-2.5 text-white sm:px-5 sm:py-3 md:rounded-3xl md:py-3 lg:px-8 lg:py-3.5"
+        className="mx-auto flex w-full min-w-0 max-w-[82rem] flex-col rounded-2xl px-3 py-2.5 text-white sm:px-5 sm:py-3 md:rounded-3xl md:py-3 lg:px-8 lg:py-3.5"
         style={{ backgroundColor: BRAND }}
       >
         <div className="flex min-w-0 items-center justify-between gap-2 sm:gap-3 md:gap-4">
+          {/* Logo */}
           <Link
             href="/"
             className="flex min-w-0 max-w-[min(100%,14rem)] items-center gap-2 sm:gap-3 rounded-full focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#4EA6F5] sm:max-w-none"
@@ -39,24 +73,20 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
             </span>
           </Link>
 
-          <ul
-            className={`hidden min-w-0 items-center justify-center gap-3 text-white/90 md:flex md:gap-4 lg:gap-6 xl:gap-8 ${NAV_TEXT}`}
-          >
+          {/* Desktop nav links */}
+          <ul className={`hidden min-w-0 items-center justify-center gap-3 text-white/90 md:flex md:gap-4 lg:gap-6 xl:gap-8 ${NAV_TEXT}`}>
             {tr.links.map(({ href, label }) => (
               <li key={href} className="shrink-0">
-                <Link href={href} className="text-white/90">
+                <Link href={href} className="text-white/90 hover:text-white transition-colors">
                   {label}
                 </Link>
               </li>
             ))}
           </ul>
 
-          <div className="hidden shrink-0 items-center gap-2 md:flex md:gap-2 lg:gap-3">
-            <a
-              href="#"
-              className="inline-flex leading-none"
-              aria-label={tr.downloadAppStore}
-            >
+          {/* Desktop right side: store badges + lang toggle */}
+          <div className="hidden shrink-0 items-center gap-3 md:flex lg:gap-4">
+            <a href="#" className="inline-flex leading-none" aria-label={tr.downloadAppStore}>
               <Image
                 src="/branding/get-it-on-apple.png"
                 alt=""
@@ -66,11 +96,7 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
                 unoptimized
               />
             </a>
-            <a
-              href="#"
-              className="inline-flex leading-none"
-              aria-label={tr.downloadGooglePlay}
-            >
+            <a href="#" className="inline-flex leading-none" aria-label={tr.downloadGooglePlay}>
               <Image
                 src="/branding/google-play-store-logo-png.webp"
                 alt=""
@@ -80,22 +106,26 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
                 unoptimized
               />
             </a>
+            <LangToggle locale={locale} />
           </div>
 
-          <button
-            type="button"
-            className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-white text-[#4EA6F5] sm:size-11 md:hidden"
-            aria-expanded={open}
-            aria-controls="mobile-nav"
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span className="sr-only">
-              {open ? tr.closeMenu : tr.openMenu}
-            </span>
-            {open ? <CloseIcon /> : <MenuIcon />}
-          </button>
+          {/* Mobile: lang toggle + hamburger */}
+          <div className="flex shrink-0 items-center gap-2 md:hidden">
+            <LangToggle locale={locale} />
+            <button
+              type="button"
+              className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-white text-[#4EA6F5] sm:size-11"
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              onClick={() => setOpen((v) => !v)}
+            >
+              <span className="sr-only">{open ? tr.closeMenu : tr.openMenu}</span>
+              {open ? <CloseIcon /> : <MenuIcon />}
+            </button>
+          </div>
         </div>
 
+        {/* Mobile menu */}
         <div
           id="mobile-nav"
           className={`grid overflow-hidden transition-[grid-template-rows] duration-200 ease-out md:hidden ${
@@ -118,11 +148,7 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
                 ))}
               </ul>
               <div className="flex flex-col items-center gap-3 pb-1">
-                <a
-                  href="#"
-                  className="inline-flex leading-none"
-                  aria-label={tr.downloadAppStore}
-                >
+                <a href="#" className="inline-flex leading-none" aria-label={tr.downloadAppStore}>
                   <Image
                     src="/branding/get-it-on-apple.png"
                     alt=""
@@ -132,11 +158,7 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
                     unoptimized
                   />
                 </a>
-                <a
-                  href="#"
-                  className="inline-flex leading-none"
-                  aria-label={tr.downloadGooglePlay}
-                >
+                <a href="#" className="inline-flex leading-none" aria-label={tr.downloadGooglePlay}>
                   <Image
                     src="/branding/google-play-store-logo-png.webp"
                     alt=""
@@ -158,12 +180,7 @@ export function Navbar({ tr }: { tr: Translations["navbar"] }) {
 function MenuIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M4 7h16M4 12h16M4 17h16"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+      <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
@@ -171,12 +188,7 @@ function MenuIcon() {
 function CloseIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M6 6l12 12M18 6L6 18"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }

@@ -29,8 +29,11 @@ body {
 
 /* Carrousel sessions : défilement vers la gauche, boucle via --hangouts-dx (px) */
 @keyframes hangouts-infinite {
-  to {
+  from {
     transform: translate3d(calc(-1 * var(--hangouts-dx, 0px)), 0, 0);
+  }
+  to {
+    transform: translate3d(0px, 0, 0);
   }
 }
 

@@ -26,7 +26,7 @@ export function FaqSection({ tr }: { tr: Translations["faq"] }) {
       className="w-full border-b border-zinc-100 bg-white px-3 pb-6 pt-14 sm:px-5 sm:pb-7 sm:pt-16 lg:px-8 lg:pb-8 lg:pt-20"
       aria-labelledby="faq-heading"
     >
-      <div className="mx-auto grid w-full max-w-[71rem] gap-10 lg:grid-cols-2 lg:items-start lg:gap-16 xl:gap-20">
+      <div className="mx-auto grid w-full max-w-[82rem] gap-10 lg:grid-cols-2 lg:items-start lg:gap-16 xl:gap-20">
         <div className="max-w-md lg:pt-0">
           <h2
             id="faq-heading"

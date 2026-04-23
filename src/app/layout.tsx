@@ -45,7 +45,7 @@ export default async function RootLayout({
       className={`${bricolageGrotesque.variable} ${geistMono.variable} h-full bg-white antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white font-sans">
-        <Navbar tr={tr.navbar} />
+        <Navbar tr={tr.navbar} locale={locale} />
         {children}
         <Footer tr={tr.footer} />
       </body>

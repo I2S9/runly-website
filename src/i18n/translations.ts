@@ -25,8 +25,28 @@ const translations = {
       downloadGooglePlay: "Télécharger sur Google Play",
       imageAlt: "Groupe de coureuses en pleine course sur route, souriant.",
     },
+    features: {
+      items: [
+        {
+          title: "Trouvez votre partenaire",
+          description: "Trouvez des coureurs à votre niveau, votre allure et vos objectifs.",
+        },
+        {
+          title: "Créez & rejoignez des sessions",
+          description: "Lancez une session en secondes ou rejoignez des coureurs près de chez vous.",
+        },
+        {
+          title: "Rejoignez des clubs de running",
+          description: "Rejoignez des communautés actives et participez à des événements exclusifs.",
+        },
+        {
+          title: "Suivez vos progrès",
+          description: "Analysez vos performances et célébrez chaque étape franchie.",
+        },
+      ],
+    },
     carousel: {
-      heading: "des sessions de running à rejoindre tout de suite",
+      heading: "Des sessions de running à rejoindre tout de suite",
       ariaLabel: "Défilement de sessions de running",
       cards: [
         { title: "Marathon du saucisson", place: "Chambéry, France", flag: "🇫🇷", participants: "86+" },
@@ -42,6 +62,18 @@ const translations = {
         { title: "Le club des ventres à l'ancienne", place: "Bruxelles, Belgique", flag: "🇧🇪", participants: "33+" },
         { title: "Trotinette en mode traque (interdit de voler l'eau)", place: "Strasbourg, France", flag: "🇫🇷", participants: "19+" },
         { title: "Grimpe ton escalier avant le 10 km (promis ça pique)", place: "Grenoble, France", flag: "🇫🇷", participants: "55+" },
+      ],
+    },
+    communityBanner: {
+      badge: "COMMUNAUTÉ",
+      heading: "Plus qu'une app,",
+      headingAccent: "une communauté.",
+      body: "Runly, c'est l'énergie d'une communauté qui se soutient, se motive et partage la même passion.",
+      imageAlt: "Groupe de coureurs souriants près d'un pont.",
+      stats: [
+        { value: "25 000+", label: "Runners" },
+        { value: "1 200+", label: "Sessions / mois" },
+        { value: "350+", label: "Clubs actifs" },
       ],
     },
     faq: {
@@ -66,6 +98,12 @@ const translations = {
         },
       ],
     },
+    stats: [
+      { value: "25 000+", label: "Coureurs actifs" },
+      { value: "1 200+", label: "Sessions chaque mois" },
+      { value: "350+", label: "Clubs de running" },
+      { value: "50+", label: "Villes dans le monde" },
+    ],
     footer: {
       tagline: "Trouvez des partenaires de course au même niveau que vous et progressez ensemble.",
       aboutTitle: "À propos",
@@ -111,8 +149,28 @@ const translations = {
       downloadGooglePlay: "Get it on Google Play",
       imageAlt: "Group of female runners on a road, smiling.",
     },
+    features: {
+      items: [
+        {
+          title: "Find your match",
+          description: "Connect with runners who share your level, pace and goals.",
+        },
+        {
+          title: "Create & join sessions",
+          description: "Start a session in seconds or join others nearby, whenever you want.",
+        },
+        {
+          title: "Join running clubs",
+          description: "Join active communities and take part in exclusive events.",
+        },
+        {
+          title: "Track your progress",
+          description: "Analyze your performance and celebrate every milestone.",
+        },
+      ],
+    },
     carousel: {
-      heading: "running sessions to join right now",
+      heading: "Running sessions to join right now",
       ariaLabel: "Running sessions carousel",
       cards: [
         { title: "Sausage Slugfest Marathon", place: "Chambéry, France", flag: "🇫🇷", participants: "86+" },
@@ -123,11 +181,23 @@ const translations = {
         { title: "The Snail Escape (5km Nap Run)", place: "Lausanne, Switzerland", flag: "🇨🇭", participants: "18+" },
         { title: "Easy Run After Dinner Time", place: "Bordeaux, France", flag: "🇫🇷", participants: "67+" },
         { title: "It's Not the Miles, It's the Vibes", place: "Marseille, France", flag: "🇫🇷", participants: "94+" },
-        { title: "Monday Quad Meltdown", place: "Nantes, France", flag: "🇫🇷", participants: "41+" },
+        { title: "Monday Quad Meltdown", place: "Nantes", flag: "🇫🇷", participants: "41+" },
         { title: "Pre-Weigh-In Desperation Run", place: "Nice, France", flag: "🇫🇷", participants: "28+" },
         { title: "The Old School Beer Belly Club", place: "Brussels, Belgium", flag: "🇧🇪", participants: "33+" },
         { title: "Hunt Mode Jog (No Stealing Water)", place: "Strasbourg, France", flag: "🇫🇷", participants: "19+" },
         { title: "Stairway Warmup Before 10K (It Burns)", place: "Grenoble, France", flag: "🇫🇷", participants: "55+" },
+      ],
+    },
+    communityBanner: {
+      badge: "COMMUNITY",
+      heading: "More than an app,",
+      headingAccent: "a community.",
+      body: "Runly is the energy of a community that supports, motivates and shares the same passion.",
+      imageAlt: "Group of smiling runners near a bridge.",
+      stats: [
+        { value: "25K+", label: "Runners" },
+        { value: "1,200+", label: "Sessions / month" },
+        { value: "350+", label: "Active clubs" },
       ],
     },
     faq: {
@@ -152,6 +222,12 @@ const translations = {
         },
       ],
     },
+    stats: [
+      { value: "25K+", label: "Active runners" },
+      { value: "1,200+", label: "Sessions every month" },
+      { value: "350+", label: "Running clubs" },
+      { value: "50+", label: "Cities worldwide" },
+    ],
     footer: {
       tagline: "Find running partners at your level and progress together.",
       aboutTitle: "About",

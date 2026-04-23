@@ -10,7 +10,7 @@ export function Footer({ tr }: { tr: Translations["footer"] }) {
   return (
     <footer className="mt-auto px-3 pb-3 pt-2 font-sans sm:px-5 sm:pb-4 sm:pt-3 lg:px-8">
       <div
-        className="mx-auto w-full max-w-[71rem] rounded-2xl px-3 pb-6 pt-9 text-white sm:rounded-3xl sm:px-5 sm:pb-7 sm:pt-11 lg:px-8"
+        className="mx-auto w-full max-w-[82rem] rounded-2xl px-3 pb-6 pt-9 text-white sm:rounded-3xl sm:px-5 sm:pb-7 sm:pt-11 lg:px-8"
         style={{ backgroundColor: BRAND }}
       >
         <div className="flex flex-col gap-4 lg:flex-row lg:items-stretch lg:gap-10 xl:gap-12">

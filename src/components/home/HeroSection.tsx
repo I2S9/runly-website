@@ -7,7 +7,7 @@ export function HeroSection({ tr }: { tr: Translations["hero"] }) {
       className="w-full border-b border-zinc-100 bg-white px-3 pb-14 pt-9 sm:px-5 sm:pb-20 sm:pt-11 lg:px-8 lg:pb-28 lg:pt-12"
       aria-labelledby="hero-heading"
     >
-      <div className="mx-auto flex w-full max-w-[71rem] flex-col gap-8 lg:flex-row lg:items-center lg:gap-12 xl:gap-14">
+      <div className="mx-auto flex w-full max-w-[82rem] flex-col gap-8 lg:flex-row lg:items-center lg:gap-12 xl:gap-14">
         {/* Texte */}
         <div className="min-w-0 flex-1 text-left">
           <p className="inline-flex flex-wrap items-center gap-x-2 gap-y-1.5 rounded-full border border-zinc-200 bg-white px-4 py-2.5 text-sm leading-snug text-zinc-800 sm:text-[0.9375rem]">
@@ -63,7 +63,7 @@ export function HeroSection({ tr }: { tr: Translations["hero"] }) {
         </div>
 
         {/* Image : paysage sur mobile/tablette, portrait sur desktop */}
-        <div className="relative w-full shrink-0 self-center sm:max-w-sm lg:max-w-[20rem] xl:max-w-sm">
+        <div className="relative w-full shrink-0 self-center sm:max-w-sm lg:max-w-[26rem] xl:max-w-[30rem]">
           <div className="relative w-full overflow-hidden rounded-2xl ring-1 ring-zinc-100/80 aspect-4/3 lg:aspect-3/4">
             <Image
               src="/images/home/running-friends.jpg"
