@@ -138,8 +138,8 @@ const translations = {
       infoLinks: [
         { href: "/terms", label: "Conditions générales" },
         { href: "/privacy-policy", label: "Politique de confidentialité" },
-        { href: "#securite", label: "Conseils de sécurité" },
-        { href: "#communaute", label: "Charte de la communauté" },
+        { href: "/safety-tips", label: "Conseils de sécurité" },
+        { href: "/community-guidelines", label: "Charte de la communauté" },
       ],
       copyright: (year: number) => `© ${year} Runly. Tous droits réservés.`,
       navAriaLabel: "Infos légales et communauté",
@@ -147,6 +147,11 @@ const translations = {
     downloadModal: {
       title: "Bientôt disponible",
       message: "Runly arrive très bientôt. Reste connecté, ça va déchirer !",
+      close: "Fermer",
+    },
+    blogModal: {
+      title: "Bientôt disponible",
+      message: "On prépare des articles sur le running, la motivation et la communauté. Reste branché !",
       close: "Fermer",
     },
   },
@@ -288,8 +293,8 @@ const translations = {
       infoLinks: [
         { href: "/terms", label: "Terms & Conditions" },
         { href: "/privacy-policy", label: "Privacy Policy" },
-        { href: "#securite", label: "Safety Tips" },
-        { href: "#communaute", label: "Community Guidelines" },
+        { href: "/safety-tips", label: "Safety Tips" },
+        { href: "/community-guidelines", label: "Community Guidelines" },
       ],
       copyright: (year: number) => `© ${year} Runly. All rights reserved.`,
       navAriaLabel: "Legal and community info",
@@ -297,6 +302,11 @@ const translations = {
     downloadModal: {
       title: "Coming Soon",
       message: "Runly is coming very soon. Stay tuned, it's going to be great!",
+      close: "Close",
+    },
+    blogModal: {
+      title: "Blog Coming Soon",
+      message: "We are working on articles about running, motivation and community. Check back soon!",
       close: "Close",
     },
   },

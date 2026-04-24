@@ -2,15 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Translations } from "@/i18n/translations";
 import { DownloadButtons } from "@/components/ui/DownloadButtons";
+import { FooterInteractiveLinks } from "@/components/layout/FooterInteractiveLinks";
 
 const BRAND = "#4EA6F5";
 
 export function Footer({
   tr,
   trModal,
+  trBlogModal,
 }: {
   tr: Translations["footer"];
   trModal: Translations["downloadModal"];
+  trBlogModal: Translations["blogModal"];
 }) {
   const year = new Date().getFullYear();
 
@@ -81,22 +84,13 @@ export function Footer({
           </div>
 
           <div className="grid w-full min-w-0 max-w-2xl flex-1 grid-cols-1 gap-10 min-[400px]:grid-cols-2 min-[400px]:gap-x-4 min-[400px]:gap-y-0 sm:gap-x-5 md:gap-x-6 lg:ml-auto lg:pl-8 xl:pl-12">
-            <nav aria-labelledby="footer-about-2">
-              <h2 id="footer-about-2" className="text-base font-bold leading-none tracking-tight text-zinc-900 sm:text-lg">
-                {tr.aboutTitle}
-              </h2>
-              <ul className="mt-4 flex flex-col gap-3 text-sm sm:mt-5 sm:text-[0.9375rem]">
-                {tr.aboutLinks.map(({ href, label }) => (
-                  <li key={href}>
-                    {href.startsWith("mailto:") ? (
-                      <a href={href} className="text-zinc-500 transition hover:text-zinc-900">{label}</a>
-                    ) : (
-                      <Link href={href} className="text-zinc-500 transition hover:text-zinc-900">{label}</Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <FooterInteractiveLinks
+              links={tr.aboutLinks}
+              downloadModal={trModal}
+              blogModal={trBlogModal}
+              ariaLabelledBy="footer-about-2"
+              heading={tr.aboutTitle}
+            />
 
             <nav aria-labelledby="footer-info-2">
               <h2 id="footer-info-2" className="text-base font-bold leading-none tracking-tight text-zinc-900 sm:text-lg">
