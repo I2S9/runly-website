@@ -1,27 +1,18 @@
+import Image from "next/image";
 import type { Translations } from "@/i18n/translations";
 
 const BRAND = "#4EA6F5";
 
 const StatIcons = [
-  <svg key="runners" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={BRAND} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+  <svg key="runners" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={BRAND} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
     <circle cx="9" cy="7" r="4" />
     <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
   </svg>,
-  <svg key="sessions" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={BRAND} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <rect x="3" y="4" width="18" height="17" rx="2" />
-    <line x1="16" y1="2" x2="16" y2="6" />
-    <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-  </svg>,
-  <svg key="clubs" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={BRAND} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-  </svg>,
-  <svg key="cities" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={BRAND} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+  <Image key="sessions" src="/branding/calendar.svg" alt="" width={40} height={40} aria-hidden />,
+  <Image key="clubs" src="/branding/shoes.svg" alt="" width={40} height={40} aria-hidden />,
+  <svg key="cities" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={BRAND} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
     <circle cx="12" cy="12" r="10" />
     <line x1="2" y1="12" x2="22" y2="12" />
     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
