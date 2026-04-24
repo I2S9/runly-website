@@ -20,37 +20,41 @@ const PLACEHOLDER_CLASSES = [
   "bg-gradient-to-br from-slate-700 via-cyan-900/50 to-zinc-950",
 ];
 
-const AVATAR_TINTS: [string, string, string, string][] = [
-  ["bg-rose-300", "bg-amber-200", "bg-cyan-200", "bg-lime-200"],
-  ["bg-orange-200", "bg-sky-300", "bg-fuchsia-200", "bg-white"],
-  ["bg-yellow-200", "bg-pink-300", "bg-emerald-200", "bg-zinc-200"],
-  ["bg-red-200", "bg-amber-100", "bg-stone-300", "bg-violet-200"],
-  ["bg-amber-100", "bg-rose-200", "bg-indigo-200", "bg-lime-100"],
-  ["bg-stone-200", "bg-blue-200", "bg-green-200", "bg-amber-200"],
-  ["bg-orange-200", "bg-rose-200", "bg-violet-200", "bg-zinc-100"],
-  ["bg-amber-200", "bg-sky-200", "bg-lime-200", "bg-white"],
-  ["bg-fuchsia-200", "bg-cyan-200", "bg-yellow-200", "bg-slate-200"],
-  ["bg-pink-200", "bg-indigo-200", "bg-emerald-200", "bg-amber-100"],
-  ["bg-rose-100", "bg-blue-200", "bg-orange-200", "bg-lime-100"],
-  ["bg-cyan-200", "bg-amber-200", "bg-rose-300", "bg-white"],
-  ["bg-amber-200", "bg-violet-200", "bg-green-200", "bg-zinc-200"],
+const AVATARS = [
+  "/images/avatars/women-1.png",
+  "/images/avatars/men-1.png",
+  "/images/avatars/women-2.png",
+  "/images/avatars/men-2.png",
+  "/images/avatars/women-3.png",
 ];
 
-function AvatarStack({ tints }: { tints: [string, string, string, string] }) {
+/** 4 avatars par carte, ordre décalé à chaque carte pour varier */
+const AVATAR_SETS: [string, string, string, string][] = Array.from(
+  { length: 13 },
+  (_, i) => [
+    AVATARS[(i + 0) % AVATARS.length],
+    AVATARS[(i + 1) % AVATARS.length],
+    AVATARS[(i + 2) % AVATARS.length],
+    AVATARS[(i + 3) % AVATARS.length],
+  ] as [string, string, string, string]
+);
+
+function AvatarStack({ srcs }: { srcs: [string, string, string, string] }) {
   return (
     <div className="flex items-center" role="presentation">
-      {tints.map((c, i) => (
+      {srcs.map((src, i) => (
         <div
           key={i}
           className={[
-            "relative size-5 rounded-full border-2 border-white/90 shadow-sm sm:size-6",
-            c,
+            "relative size-5 overflow-hidden rounded-full border-2 border-white/90 shadow-sm sm:size-6",
             i > 0 ? "-ml-2" : "",
           ]
             .filter(Boolean)
             .join(" ")}
           style={{ zIndex: i * 10 }}
-        />
+        >
+          <Image src={src} alt="" fill className="object-cover" sizes="24px" />
+        </div>
       ))}
     </div>
   );
@@ -61,13 +65,13 @@ type Card = Translations["carousel"]["cards"][number];
 function HangoutCardItem({
   card,
   placeholderClass,
-  avatarTints,
+  avatarSrcs,
   imageSrc,
   ariaHidden = false,
 }: {
   card: Card;
   placeholderClass: string;
-  avatarTints: [string, string, string, string];
+  avatarSrcs: [string, string, string, string];
   imageSrc?: string;
   ariaHidden?: boolean;
 }) {
@@ -112,7 +116,7 @@ function HangoutCardItem({
           </p>
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1">
-          <AvatarStack tints={avatarTints} />
+          <AvatarStack srcs={avatarSrcs} />
           <span className="rounded-full border border-white/20 bg-white/15 px-2 py-0.5 text-[0.7rem] font-semibold text-white shadow-sm backdrop-blur-sm sm:text-xs">
             {card.participants}
           </span>
@@ -203,7 +207,7 @@ export function HangoutsCarouselSection({
                 key={`${card.title}-${i}`}
                 card={card}
                 placeholderClass={PLACEHOLDER_CLASSES[i % PLACEHOLDER_CLASSES.length]}
-                avatarTints={AVATAR_TINTS[i % AVATAR_TINTS.length]}
+                avatarSrcs={AVATAR_SETS[i % AVATAR_SETS.length]}
                 imageSrc={CARD_IMAGES[i % cards.length]}
                 ariaHidden={i >= cards.length}
               />
