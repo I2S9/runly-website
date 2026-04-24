@@ -45,6 +45,19 @@ const translations = {
         },
       ],
     },
+    showcase: {
+      heading: "Tout ce qu'il vous faut",
+      headingAccent: "pour courir mieux, ensemble.",
+      body: "Runly, c'est l'app qui regroupe tout ce dont vous avez besoin : trouver des partenaires, organiser vos sorties et suivre vos progrès.",
+      points: [
+        "Carte en direct pour voir où sont vos partenaires",
+        "Matching intelligent selon votre profil et votre allure",
+        "Objectifs personnalisés et stats détaillées",
+        "Communauté sécurisée et bienveillante",
+      ],
+      cta: "Découvrir les fonctionnalités",
+      imageAlt: "Captures d'écran de l'application Runly",
+    },
     carousel: {
       heading: "Des sessions de running à rejoindre tout de suite",
       ariaLabel: "Défilement de sessions de running",
@@ -178,6 +191,19 @@ const translations = {
           description: "Analyze your performance and celebrate every milestone.",
         },
       ],
+    },
+    showcase: {
+      heading: "Everything you need",
+      headingAccent: "to run better, together.",
+      body: "Runly brings everything you need into one place: find partners, organise your runs and track your progress.",
+      points: [
+        "Live map to see where your partners are",
+        "Smart matching based on your profile and pace",
+        "Personalised goals and detailed stats",
+        "Secure and respectful community",
+      ],
+      cta: "Explore features",
+      imageAlt: "Runly app screenshots",
     },
     carousel: {
       heading: "Running sessions to join right now",

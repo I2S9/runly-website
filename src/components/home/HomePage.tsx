@@ -3,6 +3,7 @@ import { FaqSection } from "@/components/home/FaqSection";
 import { FeaturesSection } from "@/components/home/FeaturesSection";
 import { HangoutsCarouselSection } from "@/components/home/HangoutsCarouselSection";
 import { HeroSection } from "@/components/home/HeroSection";
+import { AppShowcaseSection } from "@/components/home/AppShowcaseSection";
 import { PreFooterSection } from "@/components/home/PreFooterSection";
 import { getLocale } from "@/lib/locale";
 import { t } from "@/i18n/translations";
@@ -17,6 +18,7 @@ export async function HomePage() {
         <HeroSection tr={tr.hero} trModal={tr.downloadModal} />
         <FeaturesSection tr={tr.features} />
         <HangoutsCarouselSection tr={tr.carousel} />
+        <AppShowcaseSection tr={tr.showcase} />
         <CommunityBanner tr={tr.communityBanner} />
         <FaqSection tr={tr.faq} />
         <TestimonialBand tr={tr.communityBanner.testimonial} />
