@@ -73,30 +73,30 @@ function HangoutCardItem({
 }) {
   return (
     <article
-      className="group relative w-[min(15rem,70vw)] shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-zinc-900 shadow-md ring-1 ring-black/10 sm:w-[16.25rem] md:w-[17rem]"
+      className="group relative isolate w-[min(15rem,70vw)] shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-zinc-900 shadow-md ring-1 ring-black/10 sm:w-[16.25rem] md:w-[17rem]"
       style={{ aspectRatio: "1 / 1" }}
       aria-hidden={ariaHidden}
     >
-      <div className="absolute inset-0 overflow-hidden" aria-hidden>
+      <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden>
         {imageSrc ? (
           <Image
             src={imageSrc}
             alt=""
             fill
-            className="object-cover will-change-transform transform-gpu transition-transform duration-500 ease-out group-hover:scale-110"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
             sizes="(max-width: 640px) 70vw, 272px"
           />
         ) : (
           <div
-            className={`h-full w-full will-change-transform ${placeholderClass} transform-gpu transition-transform duration-500 ease-out group-hover:scale-110`}
+            className={`h-full w-full ${placeholderClass} transition-transform duration-500 ease-out group-hover:scale-110`}
           />
         )}
       </div>
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
+        className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
         aria-hidden
       />
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-1.5 p-3 sm:p-3.5">
+      <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-1.5 p-3 sm:p-3.5">
         <div className="min-w-0 pr-0.5">
           <h3 className="text-balance text-base font-bold leading-snug text-white sm:text-lg">
             {card.title}
