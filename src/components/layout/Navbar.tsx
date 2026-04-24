@@ -60,7 +60,7 @@ export function Navbar({
           <Link
             href="/"
             className="flex min-w-0 max-w-[min(100%,14rem)] items-center gap-2 sm:gap-3 rounded-full focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#4EA6F5] sm:max-w-none"
-            onClick={() => setOpen(false)}
+            onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
           >
             <Image
               src="/branding/runly.svg"
@@ -80,9 +80,15 @@ export function Navbar({
           <ul className={`hidden min-w-0 items-center justify-center gap-3 text-white/90 md:flex md:gap-4 lg:gap-6 xl:gap-8 ${NAV_TEXT}`}>
             {tr.links.map(({ href, label }) => (
               <li key={href} className="shrink-0">
-                <Link href={href} className="text-white/90 hover:text-white transition-colors">
-                  {label}
-                </Link>
+                {href.startsWith("mailto:") ? (
+                  <a href={href} className="text-white/90 hover:text-white transition-colors">
+                    {label}
+                  </a>
+                ) : (
+                  <Link href={href} className="text-white/90 hover:text-white transition-colors">
+                    {label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -125,13 +131,23 @@ export function Navbar({
               <ul className={`flex w-full flex-col items-center gap-1 text-white/90 ${NAV_TEXT}`}>
                 {tr.links.map(({ href, label }) => (
                   <li key={href}>
-                    <Link
-                      href={href}
-                      className="flex min-h-12 items-center justify-center py-2 text-white/90 sm:min-h-14 sm:py-2.5"
-                      onClick={() => setOpen(false)}
-                    >
-                      {label}
-                    </Link>
+                    {href.startsWith("mailto:") ? (
+                      <a
+                        href={href}
+                        className="flex min-h-12 items-center justify-center py-2 text-white/90 sm:min-h-14 sm:py-2.5"
+                        onClick={() => setOpen(false)}
+                      >
+                        {label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={href}
+                        className="flex min-h-12 items-center justify-center py-2 text-white/90 sm:min-h-14 sm:py-2.5"
+                        onClick={() => setOpen(false)}
+                      >
+                        {label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

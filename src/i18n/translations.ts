@@ -7,8 +7,8 @@ const translations = {
       links: [
         { href: "#features", label: "Fonctionnalités" },
         { href: "#rating", label: "Avis" },
-        { href: "#contact", label: "Contact" },
-        { href: "#about", label: "À propos" },
+        { href: "mailto:support@runly-app.com", label: "Contact" },
+        { href: "/about", label: "À propos" },
       ],
       openMenu: "Ouvrir le menu",
       closeMenu: "Fermer le menu",
@@ -141,8 +141,8 @@ const translations = {
       links: [
         { href: "#features", label: "Features" },
         { href: "#rating", label: "Reviews" },
-        { href: "#contact", label: "Contact" },
-        { href: "#about", label: "About" },
+        { href: "mailto:support@runly-app.com", label: "Contact" },
+        { href: "/about", label: "About" },
       ],
       openMenu: "Open menu",
       closeMenu: "Close menu",
