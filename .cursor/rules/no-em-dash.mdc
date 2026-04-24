@@ -1,0 +1,34 @@
+---
+description: Interdit les tirets cadratins et demi-cadratins dans tout le contenu du site
+alwaysApply: true
+---
+
+# Pas de tirets cadratins dans le contenu
+
+N'utilise JAMAIS le tiret cadratin (—) ni le tiret demi-cadratin (–) dans les textes du site (UI, copy, traductions, strings).
+
+**Seule exception** : les mots composés avec un trait d'union court (-), ex. "porte-monnaie", "mise-à-jour".
+
+## Remplacements
+
+| ❌ Interdit | ✅ Remplacer par |
+|------------|----------------|
+| `— ` (em dash) | `:` ou `.` ou une nouvelle phrase |
+| ` — ` | `,` ou `. ` selon le contexte |
+| `–` (en dash) | `-` uniquement pour les mots composés |
+
+## Exemples
+
+```
+// ❌
+"Running is so much better — so every run becomes a shared experience."
+
+// ✅
+"Running is so much better. Every run becomes a shared experience."
+
+// ❌
+"No club membership — no expensive gear."
+
+// ✅
+"No club membership, no expensive gear."
+```

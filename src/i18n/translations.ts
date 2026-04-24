@@ -136,8 +136,8 @@ const translations = {
       ],
       infoTitle: "Infos",
       infoLinks: [
-        { href: "#cgu", label: "Conditions générales" },
-        { href: "#confidentialite", label: "Politique de confidentialité" },
+        { href: "/terms", label: "Conditions générales" },
+        { href: "/privacy-policy", label: "Politique de confidentialité" },
         { href: "#securite", label: "Conseils de sécurité" },
         { href: "#communaute", label: "Charte de la communauté" },
       ],
@@ -286,8 +286,8 @@ const translations = {
       ],
       infoTitle: "Info",
       infoLinks: [
-        { href: "#cgu", label: "Terms & Conditions" },
-        { href: "#confidentialite", label: "Privacy Policy" },
+        { href: "/terms", label: "Terms & Conditions" },
+        { href: "/privacy-policy", label: "Privacy Policy" },
         { href: "#securite", label: "Safety Tips" },
         { href: "#communaute", label: "Community Guidelines" },
       ],
