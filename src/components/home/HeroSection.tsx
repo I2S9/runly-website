@@ -56,16 +56,42 @@ export function HeroSection({
           </div>
         </div>
 
-        {/* Image : paysage sur mobile/tablette, portrait sur desktop */}
-        <div className="relative w-full shrink-0 self-center sm:max-w-sm lg:max-w-[20rem] xl:max-w-[23rem]" style={{ transform: "rotate(-3deg) translateX(-36px) translateY(24px)" }}>
-          <div className="relative w-full overflow-hidden rounded-2xl ring-1 ring-zinc-100/80 aspect-4/3 lg:aspect-3/4">
+        {/* Images superposées et inclinées */}
+        <div className="relative mx-auto w-full max-w-88 shrink-0 self-center sm:max-w-sm lg:mx-0 lg:w-104 lg:max-w-none xl:w-120" style={{ height: "clamp(320px, 85vw, 540px)" }}>
+          {/* Image arrière — inclinée à droite */}
+          <div
+            className="absolute right-0 top-0 w-[65%] sm:w-[60%] lg:w-[62%] overflow-hidden rounded-2xl"
+            style={{
+              transform: "rotate(4deg) translateX(8px) translateY(40px)",
+              aspectRatio: "3/4",
+              zIndex: 1,
+            }}
+          >
+            <Image
+              src="/images/home/header-image-2.jpg"
+              alt="Deux coureuses sur un chemin forestier"
+              fill
+              className="object-cover object-center"
+              sizes="(min-width: 1024px) 14rem, (min-width: 640px) 16rem, 65vw"
+            />
+          </div>
+
+          {/* Image avant — inclinée à gauche */}
+          <div
+            className="absolute left-0 bottom-0 w-[68%] sm:w-[63%] lg:w-[65%] overflow-hidden rounded-2xl"
+            style={{
+              transform: "rotate(-4deg) translateX(-8px) translateY(16px)",
+              aspectRatio: "3/4",
+              zIndex: 2,
+            }}
+          >
             <Image
               src="/images/home/running-friends.jpg"
               alt={tr.imageAlt}
               fill
               className="object-cover object-[50%_68%]"
               priority
-              sizes="(min-width: 1024px) 20rem, (min-width: 640px) 24rem, 100vw"
+              sizes="(min-width: 1024px) 15rem, (min-width: 640px) 17rem, 68vw"
             />
           </div>
         </div>
