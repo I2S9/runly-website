@@ -155,7 +155,7 @@ function PhoneMockups() {
 
 export function AppShowcaseSection({ tr }: { tr: Translations["showcase"] }) {
   return (
-    <section className="w-full bg-white px-3 py-14 sm:px-5 sm:py-16 lg:px-8 lg:py-20">
+    <section id="features" className="w-full bg-white px-3 py-14 sm:px-5 sm:py-16 lg:px-8 lg:py-20">
       <div className="mx-auto flex w-full max-w-328 flex-col items-center gap-12 lg:flex-row lg:items-center lg:gap-16 xl:gap-20">
 
         {/* Phone mockups */}

@@ -3,7 +3,7 @@ import type { Translations } from "@/i18n/translations";
 
 const BRAND   = "#4EA6F5";
 const BG      = "#f8fafc";
-const BAND_BG = "rgba(78,166,245,0.10)";
+const BAND_BG = "#ffffff";
 
 const PHOTO_SLOTS = [
   { src: "/images/home/men-run.png",      alt: "Two runners smiling together" },

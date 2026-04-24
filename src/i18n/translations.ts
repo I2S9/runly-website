@@ -123,10 +123,15 @@ const translations = {
       { value: "50+", label: "Villes dans le monde" },
     ],
     footer: {
+      ctaHeading: "Prêt à courir autrement ?",
+      ctaSubtitle: "Télécharge Runly gratuitement et rejoins ta prochaine session dès aujourd'hui.",
+      ctaFree: "C'est gratuit !",
+      downloadAppStore: "Télécharger sur l'App Store",
+      downloadGooglePlay: "Télécharger sur Google Play",
       tagline: "Trouvez des partenaires de course au même niveau que vous et progressez ensemble.",
       aboutTitle: "À propos",
       aboutLinks: [
-        { href: "#careers", label: "Carrières" },
+        { href: "mailto:support@runly-app.com", label: "Contact" },
         { href: "#blog", label: "Blog" },
         { href: "#download-ios", label: "Téléchargement iOS" },
         { href: "#download-android", label: "Téléchargement Android" },
@@ -270,10 +275,15 @@ const translations = {
       { value: "50+", label: "Cities worldwide" },
     ],
     footer: {
+      ctaHeading: "Ready to run differently?",
+      ctaSubtitle: "Download Runly for free and start your next run today.",
+      ctaFree: "It's free!",
+      downloadAppStore: "Download on the App Store",
+      downloadGooglePlay: "Get it on Google Play",
       tagline: "Find running partners at your level and progress together.",
       aboutTitle: "About",
       aboutLinks: [
-        { href: "#careers", label: "Careers" },
+        { href: "mailto:support@runly-app.com", label: "Contact" },
         { href: "#blog", label: "Blog" },
         { href: "#download-ios", label: "iOS Download" },
         { href: "#download-android", label: "Android Download" },
