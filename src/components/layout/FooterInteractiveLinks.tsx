@@ -75,7 +75,7 @@ function Modal({ content, onClose }: { content: ModalContent; onClose: () => voi
 }
 
 type Props = {
-  links: { href: string; label: string }[];
+  links: readonly { href: string; label: string }[];
   downloadModal: Translations["downloadModal"];
   blogModal: Translations["blogModal"];
   ariaLabelledBy: string;
