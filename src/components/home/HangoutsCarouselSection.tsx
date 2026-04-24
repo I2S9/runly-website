@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import Image from "next/image";
 import type { Translations } from "@/i18n/translations";
 
 const PLACEHOLDER_CLASSES = [
@@ -61,11 +62,13 @@ function HangoutCardItem({
   card,
   placeholderClass,
   avatarTints,
+  imageSrc,
   ariaHidden = false,
 }: {
   card: Card;
   placeholderClass: string;
   avatarTints: [string, string, string, string];
+  imageSrc?: string;
   ariaHidden?: boolean;
 }) {
   return (
@@ -75,9 +78,19 @@ function HangoutCardItem({
       aria-hidden={ariaHidden}
     >
       <div className="absolute inset-0 overflow-hidden" aria-hidden>
-        <div
-          className={`h-full w-full will-change-transform ${placeholderClass} transform-gpu transition-transform duration-500 ease-out group-hover:scale-110`}
-        />
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt=""
+            fill
+            className="object-cover will-change-transform transform-gpu transition-transform duration-500 ease-out group-hover:scale-110"
+            sizes="(max-width: 640px) 70vw, 272px"
+          />
+        ) : (
+          <div
+            className={`h-full w-full will-change-transform ${placeholderClass} transform-gpu transition-transform duration-500 ease-out group-hover:scale-110`}
+          />
+        )}
       </div>
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
@@ -108,6 +121,21 @@ function HangoutCardItem({
     </article>
   );
 }
+
+/** Index de la carte → image (public/images/carousel/) */
+const CARD_IMAGES: Record<number, string> = {
+  0: "/images/carousel/carousel-2.webp",
+  1: "/images/carousel/carousel-3.png",
+  2: "/images/carousel/carousel-4.jpg",
+  3: "/images/carousel/carousel-5.jpg",
+  4: "/images/carousel/carousel-9.jpg",  // "Les mollets maudits d'aprem"
+  5: "/images/carousel/carousel-6.jpg",
+  6: "/images/carousel/carousel-7.jpg",
+  7: "/images/carousel/carousel-8.jpg",
+  8: "/images/carousel/carousel-10.jpg", // "Les quadriceps en PLS du lundi"
+  9: "/images/carousel/carousel-1.png",  // "Run du désespoir avant la pesée"
+  10: "/images/carousel/carousel-11.jpg", // "Grimpe ton escalier avant le 10 km"
+};
 
 export function HangoutsCarouselSection({
   tr,
@@ -176,6 +204,7 @@ export function HangoutsCarouselSection({
                 card={card}
                 placeholderClass={PLACEHOLDER_CLASSES[i % PLACEHOLDER_CLASSES.length]}
                 avatarTints={AVATAR_TINTS[i % AVATAR_TINTS.length]}
+                imageSrc={CARD_IMAGES[i % cards.length]}
                 ariaHidden={i >= cards.length}
               />
             ))}
