@@ -20,7 +20,7 @@ const translations = {
       rating: "4,9/5",
       eyebrow: "Découvrez Runly",
       h1: ["Courez avec les bonnes personnes,", "progressez ensemble"],
-      body: "Runly vous met en relation avec des coureurs qui partagent votre allure et vos objectifs, pour vous entraîner ensemble et vous dépasser en toute confiance.",
+      body: "Runly vous met en relation avec des coureurs qui partagent votre allure et vos objectifs, pour vous entraîner ensemble et vous dépasser.",
       downloadAppStore: "Télécharger sur l'App Store",
       downloadGooglePlay: "Télécharger sur Google Play",
       imageAlt: "Groupe de coureuses en pleine course sur route, souriant.",
