@@ -86,7 +86,7 @@ export function HeroSection({
             }}
           >
             <Image
-              src="/images/home/running-friends.jpg"
+              src="/images/home/running-friends-bis.png"
               alt={tr.imageAlt}
               fill
               className="object-cover object-[50%_68%]"
