@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Translations } from "@/i18n/translations";
+import { AnimatedStat } from "@/components/ui/AnimatedStat";
 
 const BRAND = "#4EA6F5";
 
@@ -30,8 +31,8 @@ export function PreFooterSection({ tr }: { tr: Translations["stats"] }) {
                 {StatIcons[i]}
               </div>
               <div>
-                <p className="text-2xl font-extrabold tracking-tight text-zinc-900 sm:text-3xl">
-                  {stat.value}
+                <p className="text-2xl font-extrabold tracking-tight text-zinc-900 tabular-nums sm:text-3xl">
+                  <AnimatedStat value={stat.value} />
                 </p>
                 <p className="mt-0.5 text-xs font-medium text-zinc-500 sm:text-sm">{stat.label}</p>
               </div>
