@@ -40,7 +40,7 @@ export function FooterPromoBlocks({
   return (
     <>
       {isHome(pathname) ? (
-        <div className="mx-auto mb-12 flex w-full max-w-328 flex-col items-center gap-4 sm:mb-16 sm:gap-5 md:mb-20 md:gap-6">
+        <div className="mx-auto mb-6 flex w-full max-w-328 flex-col items-center gap-4 sm:mb-8 sm:gap-5 md:mb-10 md:gap-6">
           <h2 className="text-balance text-center text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl md:text-4xl">
             {ctaPartnerAbove}
           </h2>
@@ -54,7 +54,7 @@ export function FooterPromoBlocks({
       ) : null}
 
       <div
-        className="mx-auto w-full max-w-328 rounded-2xl px-3 pb-12 pt-14 text-white sm:rounded-3xl sm:px-5 sm:pb-14 sm:pt-16 lg:px-8"
+        className="mx-auto w-full max-w-328 rounded-2xl px-3 pb-12 pt-8 text-white sm:rounded-3xl sm:px-5 sm:pb-14 sm:pt-10 lg:px-8"
         style={{ backgroundColor: BRAND }}
       >
         <h2 className="text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">{ctaHeading}</h2>
