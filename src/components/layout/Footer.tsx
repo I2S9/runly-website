@@ -1,16 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Translations } from "@/i18n/translations";
-import { DownloadButtons } from "@/components/ui/DownloadButtons";
+import type { Locale, Translations } from "@/i18n/translations";
+import { FooterPromoBlocks } from "@/components/layout/FooterPromoBlocks";
 import { FooterInteractiveLinks } from "@/components/layout/FooterInteractiveLinks";
 
-const BRAND = "#4EA6F5";
-
 export function Footer({
+  locale,
   tr,
   trModal,
   trBlogModal,
 }: {
+  locale: Locale;
   tr: Translations["footer"];
   trModal: Translations["downloadModal"];
   trBlogModal: Translations["blogModal"];
@@ -20,29 +20,18 @@ export function Footer({
   return (
     <footer className="mt-auto px-3 pb-3 pt-2 font-sans sm:px-5 sm:pb-4 sm:pt-3 lg:px-8">
 
-      {/* ── CTA banner bleu ── */}
-      <div
-        className="mx-auto w-full max-w-328 rounded-2xl px-3 pb-12 pt-14 text-white sm:rounded-3xl sm:px-5 sm:pb-14 sm:pt-16 lg:px-8"
-        style={{ backgroundColor: BRAND }}
-      >
-        <h2 className="text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
-          {tr.ctaHeading}
-        </h2>
-        <p className="mt-3 text-base leading-relaxed text-white/85 sm:text-lg">
-          {tr.ctaSubtitle}
-        </p>
-        <div className="mt-6">
-          <DownloadButtons
-            tr={{
-              downloadAppStore: tr.downloadAppStore,
-              downloadGooglePlay: tr.downloadGooglePlay,
-              downloadModal: trModal,
-            }}
-            size="lg"
-            layout="row"
-          />
-        </div>
-      </div>
+      <FooterPromoBlocks
+        locale={locale}
+        ctaPartnerAbove={tr.ctaPartnerAbove}
+        ctaAudienceAria={tr.ctaAudienceAria}
+        ctaAudienceClub={tr.ctaAudienceClub}
+        ctaAudienceInfluencer={tr.ctaAudienceInfluencer}
+        ctaHeading={tr.ctaHeading}
+        ctaSubtitle={tr.ctaSubtitle}
+        downloadAppStore={tr.downloadAppStore}
+        downloadGooglePlay={tr.downloadGooglePlay}
+        trModal={trModal}
+      />
 
       {/* ── Rectangle blanc (liens) ── */}
       <div className="mx-auto mt-3 w-full max-w-328 rounded-2xl border border-zinc-100 bg-white px-3 pb-6 pt-9 sm:rounded-3xl sm:px-5 sm:pb-7 sm:pt-11 lg:px-8">

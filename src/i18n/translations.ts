@@ -121,6 +121,10 @@ const translations = {
       { value: "50+", label: "Villes dans le monde" },
     ],
     footer: {
+      ctaPartnerAbove: "Devenir partenaire ?",
+      ctaAudienceAria: "Choisis ton profil",
+      ctaAudienceClub: "Vous êtes un running club",
+      ctaAudienceInfluencer: "Vous êtes influenceur",
       ctaHeading: "Prêt à courir autrement ?",
       ctaSubtitle: "Télécharge Runly gratuitement et rejoins ta prochaine session dès aujourd'hui.",
       ctaFree: "C'est gratuit !",
@@ -276,6 +280,10 @@ const translations = {
       { value: "50+", label: "Cities worldwide" },
     ],
     footer: {
+      ctaPartnerAbove: "Become a partner?",
+      ctaAudienceAria: "Choose your profile",
+      ctaAudienceClub: "Running club",
+      ctaAudienceInfluencer: "You're an influencer",
       ctaHeading: "Ready to run differently?",
       ctaSubtitle: "Download Runly for free and start your next run today.",
       ctaFree: "It's free!",

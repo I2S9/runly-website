@@ -56,7 +56,7 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col bg-white font-sans">
         <Navbar tr={tr.navbar} trModal={tr.downloadModal} locale={locale} />
         {children}
-        <Footer tr={tr.footer} trModal={tr.downloadModal} trBlogModal={tr.blogModal} />
+        <Footer locale={locale} tr={tr.footer} trModal={tr.downloadModal} trBlogModal={tr.blogModal} />
       </body>
     </html>
   );
