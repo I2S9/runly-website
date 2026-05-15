@@ -102,8 +102,8 @@ export default async function RunningClubPage() {
           sources={GALLERY_IMAGES}
           alts={Array.from(c.galleryAlts)}
           columnStaggerMs={15_000}
-          flexRowClassName={`flex min-w-0 items-end gap-3 ${NAV_WIDTH} sm:gap-5 md:gap-7 lg:gap-8 xl:gap-10`}
-          figureClassName="m-0 flex min-h-0 min-w-0 flex-1 basis-0 flex-col justify-end overflow-hidden rounded-xl sm:rounded-2xl"
+          flexRowClassName={`flex min-w-0 items-stretch gap-3 ${NAV_WIDTH} sm:gap-5 md:gap-7 lg:gap-8 xl:gap-10`}
+          figureClassName="m-0 flex min-h-0 min-w-0 flex-1 basis-0 flex-col overflow-hidden rounded-xl sm:rounded-2xl"
           imageSizes="(max-width: 640px) calc((100vw - 24px - 36px) / 4), (max-width: 1024px) calc((min(82rem,100vw - 40px) - 80px)/4), calc((min(82rem,100vw - 64px) - 112px)/4)"
         />
 

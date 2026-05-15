@@ -22,7 +22,7 @@ const copy = {
     ],
     ctaLead: "Tu souhaites avoir la chance de collaborer avec nous ?",
     ctaButton: "Rejoindre le programme Runly partner",
-    partnerEmailSubject: "Programme Runly partner (running club)",
+    partnerEmailSubject: "Programme Runly partner (influenceurs)",
   },
   en: {
     title: "Runly influencers",
@@ -38,7 +38,7 @@ const copy = {
     ],
     ctaLead: "Hoping to collaborate with us?",
     ctaButton: "Join the Runly partner program",
-    partnerEmailSubject: "Runly partner program (running club)",
+    partnerEmailSubject: "Runly partner program (influencers)",
   },
 } as const;
 
