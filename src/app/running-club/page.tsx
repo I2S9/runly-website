@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getLocale } from "@/lib/locale";
+import { GrainRotatingGallery } from "@/components/running-club/GrainRotatingGallery";
 
 const BRAND = "#4EA6F5";
 
@@ -13,6 +13,9 @@ const GALLERY_IMAGES = [
   "/images/running-club-hero.jpg",
   "/images/running-club-g2.jpg",
   "/images/running-club-g3.jpg",
+  "/images/running-club-g4.jpg",
+  "/images/running-club-g5.jpg",
+  "/images/running-club-g6.jpg",
 ] as const;
 
 const copy = {
@@ -24,6 +27,9 @@ const copy = {
       "Deux coureurs en pleine foulée devant une balustrade.",
       "Groupe pendant l'échauffement ou la préparation séance.",
       "Séance Nike Runly : équipe et ambiance sur le terrain.",
+      "Run collectif Pegasus x SRC, ambiance sur la route.",
+      "Coureurs et coureuses pendant le run Pegasus, esprit de groupe.",
+      "Séance Nike puissance avec les coachs, groupe SRC sur le terrain.",
     ] as const,
     visionParagraphs: [
       "Pour nous, Runly, c'est avant tout rassembler des personnes motivées et curieuses du running pour progresser ensemble. Quand on partage la route, la régularité devient plus simple, les conseils circulent et chaque sortie donne un peu plus envie d'enchaîner la suivante.",
@@ -44,6 +50,9 @@ const copy = {
       "Two runners sprinting outdoors near a stone balustrade.",
       "Group during warm-up ahead of the training session.",
       "Nike Runly session atmosphere on the track.",
+      "Group energy at the Pegasus SRC road run.",
+      "Runners mid-stride during the Pegasus group outing.",
+      "Nike power session with the coaching crew on the field.",
     ] as const,
     visionParagraphs: [
       "At Runly, we care first about bringing motivated, curious runners together so everyone can progress as a group. When you share the road, consistency gets easier, advice travels faster and every outing makes the next one a little more likely to happen.",
@@ -89,24 +98,14 @@ export default async function RunningClubPage() {
     <main className="min-h-[50vh] bg-white pb-4 pt-8 font-sans sm:pb-6 sm:pt-10 lg:pb-8 lg:pt-12">
       {/* Même géométrie que la Navbar : gutters viewport puis zone max-w-[82rem], sans padding interne sous le bandeau bleu. */}
       <div className={PAGE_GUTTERS}>
-        <div className={`flex min-w-0 items-end gap-3 ${NAV_WIDTH} sm:gap-5 md:gap-7 lg:gap-8 xl:gap-10`}>
-          {GALLERY_IMAGES.map((src, i) => (
-            <figure
-              key={src}
-              className="m-0 flex min-h-0 min-w-0 flex-1 basis-0 flex-col justify-end overflow-hidden rounded-xl sm:rounded-2xl"
-            >
-              <Image
-                src={src}
-                alt={c.galleryAlts[i]}
-                width={900}
-                height={1350}
-                className="h-auto max-h-[min(78vh,56rem)] w-full object-contain object-bottom"
-                sizes="(max-width: 640px) calc((100vw - 24px - 36px) / 4), (max-width: 1024px) calc((min(82rem,100vw - 40px) - 80px)/4), calc((min(82rem,100vw - 64px) - 112px)/4)"
-                priority={i === 0}
-              />
-            </figure>
-          ))}
-        </div>
+        <GrainRotatingGallery
+          sources={GALLERY_IMAGES}
+          alts={Array.from(c.galleryAlts)}
+          columnStaggerMs={15_000}
+          flexRowClassName={`flex min-w-0 items-end gap-3 ${NAV_WIDTH} sm:gap-5 md:gap-7 lg:gap-8 xl:gap-10`}
+          figureClassName="m-0 flex min-h-0 min-w-0 flex-1 basis-0 flex-col justify-end overflow-hidden rounded-xl sm:rounded-2xl"
+          imageSizes="(max-width: 640px) calc((100vw - 24px - 36px) / 4), (max-width: 1024px) calc((min(82rem,100vw - 40px) - 80px)/4), calc((min(82rem,100vw - 64px) - 112px)/4)"
+        />
 
         {/* Texte : même cadre que la galerie (gouttières + max-w), sans padding interne en plus : aligné sur le bord gauche de la barre de nav. */}
         <div className={NAV_WIDTH}>
