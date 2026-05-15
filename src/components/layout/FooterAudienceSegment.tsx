@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import type { Locale } from "@/i18n/translations";
 
@@ -12,12 +11,19 @@ const TRACK = "#4EA6F5";
 const TRACK_PAD_FR = { x: 16, insetClass: "top-2 bottom-2 left-2" };
 const TRACK_PAD_EN = { x: 12, insetClass: "top-1.5 bottom-1.5 left-1.5" };
 
+type Segment = "club" | "influencer";
+
 function pathLooksLikeInfluencer(pathname: string) {
   return pathname === "/influencer" || pathname.startsWith("/influencer/");
 }
 
 function pathLooksLikeClub(pathname: string) {
   return pathname === "/running-club" || pathname.startsWith("/running-club/");
+}
+
+function segmentFromPath(pathname: string): Segment {
+  if (pathLooksLikeInfluencer(pathname) && !pathLooksLikeClub(pathname)) return "influencer";
+  return "club";
 }
 
 export function FooterAudienceSegment({
@@ -34,21 +40,47 @@ export function FooterAudienceSegment({
   const pathname = usePathname() ?? "";
   const router = useRouter();
 
+  const [visual, setVisual] = useState<Segment>(() => segmentFromPath(pathname));
+
+  useEffect(() => {
+    setVisual(segmentFromPath(pathname));
+  }, [pathname]);
+
   useEffect(() => {
     router.prefetch("/running-club");
     router.prefetch("/influencer");
   }, [router]);
 
-  const influencerSelected =
-    pathLooksLikeInfluencer(pathname) && !pathLooksLikeClub(pathname);
-
   const clubIsPage = pathLooksLikeClub(pathname);
   const influencerIsPage = pathLooksLikeInfluencer(pathname) && !pathLooksLikeClub(pathname);
 
-  const linkClass =
+  const handleClub = () => {
+    if (visual !== "club") {
+      setVisual("club");
+      return;
+    }
+    router.push("/running-club");
+  };
+
+  const handleInfluencer = () => {
+    if (visual !== "influencer") {
+      setVisual("influencer");
+      return;
+    }
+    router.push("/influencer");
+  };
+
+  const influencerThumbRight = visual === "influencer";
+
+  const buttonBase =
     locale === "fr"
-      ? "relative z-10 flex min-h-[3.25rem] min-w-0 cursor-pointer touch-manipulation items-center justify-center rounded-full px-2.5 py-4 text-center text-[10px] font-semibold leading-none tracking-tight text-zinc-900 whitespace-nowrap sm:min-h-[3.75rem] sm:px-4 sm:py-[1.15rem] sm:text-xs md:px-4 md:text-sm lg:text-base"
-      : "relative z-10 flex min-h-12 min-w-0 cursor-pointer touch-manipulation items-center justify-center rounded-full px-1.5 py-3.5 text-center text-[10px] font-semibold leading-none tracking-tight text-zinc-900 whitespace-nowrap sm:min-h-14 sm:px-2.5 sm:py-4 sm:text-xs md:px-3 md:text-sm lg:text-base";
+      ? "relative z-10 flex min-h-[3.25rem] min-w-0 cursor-pointer touch-manipulation items-center justify-center rounded-full border-0 px-2.5 py-4 text-center text-[10px] font-semibold leading-none tracking-tight whitespace-nowrap transition-colors duration-200 sm:min-h-[3.75rem] sm:px-4 sm:py-[1.15rem] sm:text-xs md:px-4 md:text-sm lg:text-base"
+      : "relative z-10 flex min-h-12 min-w-0 cursor-pointer touch-manipulation items-center justify-center rounded-full border-0 px-1.5 py-3.5 text-center text-[10px] font-semibold leading-none tracking-tight whitespace-nowrap transition-colors duration-200 sm:min-h-14 sm:px-2.5 sm:py-4 sm:text-xs md:px-3 md:text-sm lg:text-base";
+
+  const clubClass =
+    `${buttonBase} ` + (visual === "club" ? "text-zinc-900" : "text-white hover:text-white");
+  const influencerClass =
+    `${buttonBase} ` + (visual === "influencer" ? "text-zinc-900" : "text-white hover:text-white");
 
   const trackMaxClass =
     locale === "fr"
@@ -64,30 +96,30 @@ export function FooterAudienceSegment({
         className={`relative isolate inline-grid w-max grid-cols-2 rounded-full ${trackPadClass} ${trackMaxClass}`}
         style={{ backgroundColor: TRACK, gap: 0 }}
       >
-        <Link
-          href="/running-club"
-          prefetch
-          scroll
-          className={linkClass}
+        <button
+          type="button"
+          className={clubClass}
+          aria-pressed={visual === "club"}
           aria-current={clubIsPage ? "page" : undefined}
+          onClick={handleClub}
         >
           {labelClub}
-        </Link>
-        <Link
-          href="/influencer"
-          prefetch
-          scroll
-          className={linkClass}
+        </button>
+        <button
+          type="button"
+          className={influencerClass}
+          aria-pressed={visual === "influencer"}
           aria-current={influencerIsPage ? "page" : undefined}
+          onClick={handleInfluencer}
         >
           {labelInfluencer}
-        </Link>
+        </button>
         <div
           aria-hidden
           className={`pointer-events-none absolute z-0 rounded-full bg-white shadow-md transition-transform duration-300 ease-out ${pad.insetClass}`}
           style={{
             width: `calc((100% - ${pad.x}px) / 2)`,
-            transform: influencerSelected ? "translateX(100%)" : "translateX(0)",
+            transform: influencerThumbRight ? "translateX(100%)" : "translateX(0)",
             pointerEvents: "none",
           }}
         />
