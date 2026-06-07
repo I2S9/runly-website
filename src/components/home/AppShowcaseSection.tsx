@@ -58,7 +58,7 @@ export function AppShowcaseSection({ tr }: { tr: Translations["showcase"] }) {
 
           <div className="mt-9">
             <a
-              href="#features"
+              href="/"
               className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90 sm:text-lg"
               style={{ backgroundColor: BRAND }}
             >

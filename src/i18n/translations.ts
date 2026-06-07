@@ -55,7 +55,7 @@ const translations = {
         "Objectifs personnalisés et stats détaillées",
         "Communauté sécurisée et bienveillante",
       ],
-      cta: "Découvrir les fonctionnalités",
+      cta: "Découvrir Runly",
       imageAlt: "Captures d'écran de l'application Runly",
     },
     carousel: {
@@ -214,7 +214,7 @@ const translations = {
         "Personalised goals and detailed stats",
         "Secure and respectful community",
       ],
-      cta: "Explore features",
+      cta: "Discover Runly",
       imageAlt: "Runly app screenshots",
     },
     carousel: {
