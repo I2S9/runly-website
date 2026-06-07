@@ -6,9 +6,9 @@ const BG      = "#f8fafc";
 const BAND_BG = "#ffffff";
 
 const PHOTO_SLOTS = [
-  { src: "/images/home/men-run.png",      alt: "Two runners smiling together" },
-  { src: "/images/home/running-club.png", alt: "Runly running club group photo" },
-  { src: "/images/home/run-girls.png",    alt: "Women runners celebrating" },
+  { src: "/images/home/run-group-pics.jpg",  alt: "Group of friends in running gear" },
+  { src: "/images/home/run-vibe.jpg",        alt: "Group of friends posing after a run" },
+  { src: "/images/home/speed-run.jpg",       alt: "Group of runners sprinting together" },
 ];
 
 const ROTATIONS = [-3, 1.5, -2];
@@ -44,10 +44,10 @@ export function CommunityBanner({ tr }: { tr: Translations["communityBanner"] })
           {/* Photo */}
           <div className="relative min-h-64 sm:min-h-80 lg:min-h-0 lg:w-[52%]">
             <Image
-              src="/images/home/friends-running-bridge.png"
+              src="/images/home/group-run.jpg"
               alt={tr.imageAlt}
               fill
-              className="object-cover object-center"
+              className="object-cover object-[45%_35%]"
               sizes="(min-width:1024px) 52vw, 100vw"
             />
             <div

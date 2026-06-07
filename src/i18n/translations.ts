@@ -80,7 +80,7 @@ const translations = {
       heading: "Plus qu'une app,",
       headingAccent: "une communauté.",
       body: "Runly, c'est l'énergie d'une communauté qui se soutient, se motive et partage la même passion.",
-      imageAlt: "Groupe de coureurs souriants près d'un pont.",
+      imageAlt: "Groupe de coureurs souriants lors d'une course en ville.",
       stats: [
         { value: "25 000+", label: "Runners" },
         { value: "1 200+", label: "Sessions / mois" },
@@ -239,7 +239,7 @@ const translations = {
       heading: "More than an app,",
       headingAccent: "a community.",
       body: "Runly is the energy of a community that supports, motivates and shares the same passion.",
-      imageAlt: "Group of smiling runners near a bridge.",
+      imageAlt: "Group of smiling runners during a city race.",
       stats: [
         { value: "25K+", label: "Runners" },
         { value: "1,200+", label: "Sessions / month" },
