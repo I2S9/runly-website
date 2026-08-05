@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { getLocale } from "@/lib/locale";
@@ -48,15 +49,21 @@ export default async function RootLayout({
   const locale = await getLocale();
   const tr = t(locale);
 
+  // Le back-office est une interface de travail : ni navbar marketing, ni footer.
+  const pathname = (await headers()).get("x-pathname") ?? "";
+  const isAdmin = pathname.startsWith("/admin");
+
   return (
     <html
       lang={locale}
       className={`${bricolageGrotesque.variable} ${geistMono.variable} h-full bg-white antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white font-sans">
-        <Navbar tr={tr.navbar} trModal={tr.downloadModal} locale={locale} />
+        {!isAdmin && <Navbar tr={tr.navbar} trModal={tr.downloadModal} locale={locale} />}
         {children}
-        <Footer locale={locale} tr={tr.footer} trModal={tr.downloadModal} trBlogModal={tr.blogModal} />
+        {!isAdmin && (
+          <Footer locale={locale} tr={tr.footer} trModal={tr.downloadModal} trBlogModal={tr.blogModal} />
+        )}
       </body>
     </html>
   );
