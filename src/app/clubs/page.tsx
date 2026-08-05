@@ -19,20 +19,13 @@ const copy = {
       selectedCountMany: "{n} filtres actifs",
       noResult: "Aucun résultat",
     },
-    map: {
-      hint: "Fais glisser pour naviguer · molette pour zoomer · clique sur un point",
+    card: {
       members: "membres",
-      empty: "Aucun club ne correspond à ces filtres.",
-      zoomIn: "Zoomer",
-      zoomOut: "Dézoomer",
-      reset: "Recentrer la carte",
-      loading: "Chargement de la carte…",
+      moreTags: "+{n}",
     },
-    resultsOne: "1 club sur la carte",
-    resultsMany: "{n} clubs sur la carte",
-    members: "membres",
-    close: "Fermer",
-    seeClub: "Voir le club",
+    resultsOne: "1 club",
+    resultsMany: "{n} clubs",
+    empty: "Aucun club ne correspond à ces filtres.",
     groups: [
       {
         key: "city",
@@ -165,20 +158,13 @@ const copy = {
       selectedCountMany: "{n} active filters",
       noResult: "No result",
     },
-    map: {
-      hint: "Drag to move · scroll to zoom · tap a dot",
+    card: {
       members: "members",
-      empty: "No club matches these filters.",
-      zoomIn: "Zoom in",
-      zoomOut: "Zoom out",
-      reset: "Recenter the map",
-      loading: "Loading the map…",
+      moreTags: "+{n}",
     },
-    resultsOne: "1 club on the map",
-    resultsMany: "{n} clubs on the map",
-    members: "members",
-    close: "Close",
-    seeClub: "View club",
+    resultsOne: "1 club",
+    resultsMany: "{n} clubs",
+    empty: "No club matches these filters.",
     groups: [
       {
         key: "city",
@@ -332,12 +318,10 @@ export default async function ClubsPage() {
               groups={c.groups}
               tr={{
                 filters: c.filters,
-                map: c.map,
+                card: c.card,
                 resultsOne: c.resultsOne,
                 resultsMany: c.resultsMany,
-                members: c.members,
-                close: c.close,
-                seeClub: c.seeClub,
+                empty: c.empty,
               }}
             />
           </section>
