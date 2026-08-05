@@ -241,6 +241,56 @@ export async function deleteArticle(formData: FormData) {
   redirect("/admin");
 }
 
+export type ProfileState = { error?: string; savedAt?: number };
+
+/**
+ * Identité publique du compte : nom affiché, logo, site.
+ *
+ * Le trigger `sync_publisher_identity` répercute la modification sur tous les
+ * articles déjà signés par ce compte, y compris ceux en ligne.
+ */
+export async function saveProfile(
+  _prevState: ProfileState,
+  formData: FormData,
+): Promise<ProfileState> {
+  const publisher = await requirePublisher();
+
+  const displayName = text(formData, "displayName");
+  if (displayName.length < 2) return { error: "Un nom d'au moins 2 caractères." };
+  if (displayName.length > 60) return { error: "60 caractères maximum." };
+
+  const siteUrl = text(formData, "siteUrl");
+  if (siteUrl && !/^https?:\/\/\S+$/.test(siteUrl)) {
+    return { error: "Le lien du site doit commencer par https://" };
+  }
+
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("news_publishers")
+    .update({
+      display_name: displayName,
+      logo_url: text(formData, "logoUrl") || null,
+      site_url: siteUrl || null,
+    })
+    .eq("user_id", publisher.user_id)
+    .select("user_id");
+
+  if (error) return { error: error.message };
+
+  // Sans la policy d'écriture, PostgREST ne renvoie pas d'erreur : il ne met
+  // simplement aucune ligne à jour. Mieux vaut le dire que faire croire à un
+  // enregistrement réussi.
+  if (!data || data.length === 0) {
+    return {
+      error:
+        "Enregistrement refusé par la base. La migration 20260815000000_news_publisher_profile.sql n'a probablement pas été exécutée.",
+    };
+  }
+
+  revalidatePath("/admin", "layout");
+  return { savedAt: Date.now() };
+}
+
 export async function signOut() {
   const supabase = await createSupabaseServerClient();
   await supabase.auth.signOut();

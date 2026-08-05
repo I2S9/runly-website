@@ -22,10 +22,11 @@ un partenaire ne peut ni se publier lui-même ni signer « Runly ».
 
 ### 1. Migration
 
-Dans le dépôt de l'app, exécuter dans **Supabase → SQL Editor** :
+Dans le dépôt de l'app, exécuter dans **Supabase → SQL Editor**, dans cet ordre :
 
 ```
 expo/supabase/migrations/20260814000000_news_publishers.sql
+expo/supabase/migrations/20260815000000_news_publisher_profile.sql
 ```
 
 ### 2. Variables d'environnement
@@ -88,6 +89,21 @@ Brouillon  ──soumettre──▶  En relecture  ──publier──▶  En li
 Un article en ligne n'est plus modifiable par son auteur : la correction passe
 par la rédaction Runly, qui peut le dépublier pour le rouvrir.
 
+## Profil d'un compte
+
+`/admin/profil` — nom affiché, logo, site. C'est l'identité qui signe les articles
+dans l'app, et elle appartient au compte : un partenaire la gère lui-même, sans
+passer par Runly.
+
+Modifier le nom ou le logo **resigne rétroactivement tous les articles du
+compte**, y compris ceux déjà en ligne : le trigger `sync_publisher_identity`
+propage le changement sur `running_news`. Un média qui refait son logo n'a rien
+d'autre à faire.
+
+Ce que le formulaire ne peut pas toucher : `is_admin`. Le trigger
+`protect_news_publisher_fields` le restaure à chaque écriture — personne ne
+s'auto-promeut depuis l'interface.
+
 ## Ce que l'app sait afficher
 
 L'application rend **du texte simple**, un paragraphe par bloc séparé d'une
@@ -108,6 +124,9 @@ aucun article.
 | `src/proxy.ts` | Rafraîchit la session, garde `/admin`, expose `x-pathname` au layout |
 | `src/lib/supabase/{client,server,env}.ts` | Clients navigateur et serveur |
 | `src/lib/admin/dal.ts` | Vérification d'accès et lectures — tout passe par là |
-| `src/app/admin/actions.ts` | Server Actions : enregistrer, publier, renvoyer, supprimer |
+| `src/app/admin/actions.ts` | Server Actions : enregistrer, publier, renvoyer, supprimer, profil |
+| `src/components/admin/ArticleList.tsx` | Liste : filtres par statut, recherche, extraits, signatures |
 | `src/components/admin/ArticleEditor.tsx` | Éditeur, upload de couverture, aperçu de la carte |
+| `src/components/admin/ProfileForm.tsx` | Profil du compte : nom, logo, site |
+| `src/components/admin/SubmitButton.tsx` | État d'attente par bouton (`useFormStatus`) |
 | `src/app/auth/callback/route.ts` | Échange du code PKCE du lien magique |

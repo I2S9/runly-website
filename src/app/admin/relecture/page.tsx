@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { publishArticle, rejectArticle } from "@/app/admin/actions";
+import { BackLink } from "@/components/admin/BackLink";
+import { PublisherAvatar } from "@/components/admin/PublisherAvatar";
+import { SubmitButton } from "@/components/admin/SubmitButton";
 import { listPendingArticles, requireAdmin } from "@/lib/admin/dal";
 import { parseParagraphs, type ArticleRow } from "@/lib/admin/types";
 
@@ -26,10 +29,20 @@ function ReviewCard({ article }: { article: ArticleRow }) {
         />
         <div className="min-w-0 flex-1">
           <h2 className="text-base font-semibold leading-snug text-zinc-900">{article.title}</h2>
-          <p className="mt-1 text-xs text-zinc-500">
-            {article.source} · {article.tag} · {article.locale.toUpperCase()} ·{" "}
-            {article.read_min} min · {paragraphs.length} paragraphes
-          </p>
+          <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-zinc-500">
+            <span className="flex items-center gap-1.5">
+              <PublisherAvatar name={article.source} logoUrl={article.source_logo_url} size={18} />
+              <span className="font-medium text-zinc-700">{article.source}</span>
+            </span>
+            <span>·</span>
+            <span>{article.tag}</span>
+            <span>·</span>
+            <span className="uppercase">{article.locale}</span>
+            <span>·</span>
+            <span>
+              {article.read_min} min · {paragraphs.length} paragraphes
+            </span>
+          </div>
         </div>
         <Link
           href={`/admin/articles/${article.id}`}
@@ -50,13 +63,13 @@ function ReviewCard({ article }: { article: ArticleRow }) {
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <form action={publishArticle}>
           <input type="hidden" name="id" value={article.id} />
-          <button
-            type="submit"
-            className="rounded-full px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          <SubmitButton
+            pendingLabel="Publication…"
+            className="rounded-full px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
             style={{ backgroundColor: BRAND }}
           >
             Publier dans l&apos;app
-          </button>
+          </SubmitButton>
         </form>
 
         <form action={rejectArticle} className="flex flex-1 items-center gap-2">
@@ -66,12 +79,12 @@ function ReviewCard({ article }: { article: ArticleRow }) {
             placeholder="Ce qui doit être revu…"
             className="min-w-0 flex-1 rounded-full border border-zinc-300 px-4 py-2 text-sm outline-none transition-colors focus:border-zinc-900"
           />
-          <button
-            type="submit"
-            className="shrink-0 rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50"
+          <SubmitButton
+            pendingLabel="Envoi…"
+            className="shrink-0 rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:opacity-60"
           >
             Renvoyer
-          </button>
+          </SubmitButton>
         </form>
       </div>
     </article>
@@ -84,7 +97,9 @@ export default async function ReviewQueuePage() {
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8 sm:px-6 sm:py-10">
-      <h1 className="text-2xl font-bold tracking-tight text-zinc-900">Relecture</h1>
+      <BackLink label="Articles" />
+
+      <h1 className="mt-3 text-2xl font-bold tracking-tight text-zinc-900">Relecture</h1>
       <p className="mt-1.5 text-sm text-zinc-500">
         Rien n&apos;apparaît dans l&apos;application avant d&apos;être publié ici.
       </p>

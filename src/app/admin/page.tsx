@@ -1,53 +1,10 @@
 import Link from "next/link";
+import { ArticleList } from "@/components/admin/ArticleList";
 import { listArticles, requirePublisher } from "@/lib/admin/dal";
-import { STATUS_LABELS, type ArticleRow, type ArticleStatus } from "@/lib/admin/types";
 
 export const metadata = { title: "Runly — Articles" };
 
 const BRAND = "#4EA6F5";
-
-const STATUS_STYLES: Record<ArticleStatus, string> = {
-  draft: "bg-zinc-100 text-zinc-600",
-  pending: "bg-amber-100 text-amber-800",
-  published: "bg-emerald-100 text-emerald-800",
-};
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-}
-
-function ArticleLine({ article, showAuthor }: { article: ArticleRow; showAuthor: boolean }) {
-  return (
-    <Link
-      href={`/admin/articles/${article.id}`}
-      className="flex items-center gap-4 border-b border-zinc-100 px-4 py-3.5 transition-colors last:border-b-0 hover:bg-zinc-50 sm:px-5"
-    >
-      <div
-        className="h-10 w-10 shrink-0 rounded-lg"
-        style={{
-          backgroundImage: `linear-gradient(135deg, ${article.color_start}, ${article.color_end})`,
-        }}
-        aria-hidden
-      />
-      <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-medium text-zinc-900">{article.title}</p>
-        <p className="mt-0.5 truncate text-xs text-zinc-500">
-          {article.tag} · {article.locale.toUpperCase()} · {formatDate(article.updated_at)}
-          {showAuthor && ` · ${article.source}`}
-        </p>
-      </div>
-      <span
-        className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${STATUS_STYLES[article.status]}`}
-      >
-        {STATUS_LABELS[article.status]}
-      </span>
-    </Link>
-  );
-}
 
 export default async function AdminArticlesPage() {
   const publisher = await requirePublisher();
@@ -96,17 +53,7 @@ export default async function AdminArticlesPage() {
         </div>
       )}
 
-      <div className="mt-6 overflow-hidden rounded-2xl border border-zinc-200 bg-white">
-        {articles.length === 0 ? (
-          <p className="px-5 py-12 text-center text-sm text-zinc-500">
-            Aucun article pour l&apos;instant.
-          </p>
-        ) : (
-          articles.map((article) => (
-            <ArticleLine key={article.id} article={article} showAuthor={publisher.is_admin} />
-          ))
-        )}
-      </div>
+      <ArticleList articles={articles} showAuthor={publisher.is_admin} />
     </main>
   );
 }

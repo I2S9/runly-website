@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { signOut } from "@/app/admin/actions";
+import { PublisherAvatar } from "@/components/admin/PublisherAvatar";
+import { SubmitButton } from "@/components/admin/SubmitButton";
 import { getPublisher } from "@/lib/admin/dal";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -30,16 +32,27 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             </nav>
 
             <div className="ml-auto flex items-center gap-3">
-              <span className="hidden text-sm text-zinc-500 sm:inline">
-                {publisher.display_name}
-              </span>
+              <Link
+                href="/admin/profil"
+                className="flex items-center gap-2 rounded-full py-1 pl-1 pr-2.5 transition-colors hover:bg-zinc-100"
+                title="Modifier le profil"
+              >
+                <PublisherAvatar
+                  name={publisher.display_name}
+                  logoUrl={publisher.logo_url}
+                  size={26}
+                />
+                <span className="hidden text-sm text-zinc-700 sm:inline">
+                  {publisher.display_name}
+                </span>
+              </Link>
               <form action={signOut}>
-                <button
-                  type="submit"
-                  className="rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-50"
+                <SubmitButton
+                  pendingLabel="…"
+                  className="rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:opacity-60"
                 >
                   Déconnexion
-                </button>
+                </SubmitButton>
               </form>
             </div>
           </div>

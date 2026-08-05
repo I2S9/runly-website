@@ -7,6 +7,9 @@ import {
   unpublishArticle,
   type SaveState,
 } from "@/app/admin/actions";
+import { BackLink } from "@/components/admin/BackLink";
+import { PublisherAvatar } from "@/components/admin/PublisherAvatar";
+import { SubmitButton } from "@/components/admin/SubmitButton";
 import {
   FALLBACK_IMAGE_COUNT,
   GRADIENT_PRESETS,
@@ -42,7 +45,8 @@ export function ArticleEditor({
   publisher: Publisher;
   article: ArticleRow | null;
 }) {
-  const [state, formAction, pending] = useActionState<SaveState, FormData>(saveArticle, {});
+  // L'état d'attente est géré bouton par bouton via <SubmitButton>.
+  const [state, formAction] = useActionState<SaveState, FormData>(saveArticle, {});
 
   const [title, setTitle] = useState(article?.title ?? "");
   const [tag, setTag] = useState<string>(article?.tag ?? TAGS[0]);
@@ -95,7 +99,9 @@ export function ArticleEditor({
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 sm:py-10">
-      <div className="flex flex-wrap items-end justify-between gap-4">
+      <BackLink label="Articles" />
+
+      <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900">
           {article ? "Modifier l'article" : "Nouvel article"}
         </h1>
@@ -105,23 +111,23 @@ export function ArticleEditor({
             {isLive && publisher.is_admin && (
               <form action={unpublishArticle}>
                 <input type="hidden" name="id" value={article.id} />
-                <button
-                  type="submit"
-                  className="rounded-full border border-zinc-300 px-3.5 py-1.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-50"
+                <SubmitButton
+                  pendingLabel="Retrait…"
+                  className="rounded-full border border-zinc-300 px-3.5 py-1.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-50 disabled:opacity-40"
                 >
                   Retirer de l&apos;app
-                </button>
+                </SubmitButton>
               </form>
             )}
             <form action={deleteArticle}>
               <input type="hidden" name="id" value={article.id} />
-              <button
-                type="submit"
+              <SubmitButton
+                pendingLabel="Suppression…"
                 disabled={locked}
                 className="rounded-full border border-zinc-300 px-3.5 py-1.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-50 disabled:opacity-40"
               >
                 Supprimer
-              </button>
+              </SubmitButton>
             </form>
           </div>
         )}
@@ -287,37 +293,39 @@ export function ArticleEditor({
 
           <div className="flex flex-wrap items-center gap-3">
             {isLive && publisher.is_admin ? (
-              <button
-                type="submit"
+              <SubmitButton
                 name="intent"
                 value="published"
-                disabled={pending}
+                intent="published"
+                pendingLabel="Enregistrement…"
                 className="rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
                 style={{ backgroundColor: BRAND }}
               >
-                {pending ? "Enregistrement…" : "Enregistrer — reste en ligne"}
-              </button>
+                Enregistrer — reste en ligne
+              </SubmitButton>
             ) : (
               <>
-                <button
-                  type="submit"
+                <SubmitButton
                   name="intent"
                   value="draft"
-                  disabled={pending || locked}
+                  intent="draft"
+                  pendingLabel="Enregistrement…"
+                  disabled={locked}
                   className="rounded-full border border-zinc-300 bg-white px-5 py-2.5 text-sm font-medium text-zinc-800 transition-colors hover:bg-zinc-50 disabled:opacity-50"
                 >
-                  {pending ? "Enregistrement…" : "Enregistrer le brouillon"}
-                </button>
-                <button
-                  type="submit"
+                  Enregistrer le brouillon
+                </SubmitButton>
+                <SubmitButton
                   name="intent"
                   value={publisher.is_admin ? "published" : "pending"}
-                  disabled={pending || locked}
+                  intent={publisher.is_admin ? "published" : "pending"}
+                  pendingLabel={publisher.is_admin ? "Publication…" : "Envoi…"}
+                  disabled={locked}
                   className="rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
                   style={{ backgroundColor: BRAND }}
                 >
                   {publisher.is_admin ? "Publier dans l'app" : "Soumettre à Runly"}
-                </button>
+                </SubmitButton>
               </>
             )}
           </div>
@@ -345,9 +353,16 @@ export function ArticleEditor({
                   {title || "Titre de l'article"}
                 </p>
               </div>
-              <div className="flex items-center justify-between bg-zinc-50 px-3 py-2 text-[11px] text-zinc-500">
-                <span>{publisher.is_admin ? source : publisher.display_name}</span>
-                <span>{readMin || autoReadMin} min</span>
+              <div className="flex items-center gap-2 bg-zinc-50 px-3 py-2 text-[11px] text-zinc-500">
+                <PublisherAvatar
+                  name={publisher.is_admin ? source || publisher.display_name : publisher.display_name}
+                  logoUrl={publisher.logo_url}
+                  size={18}
+                />
+                <span className="min-w-0 truncate font-medium text-zinc-700">
+                  {publisher.is_admin ? source || publisher.display_name : publisher.display_name}
+                </span>
+                <span className="ml-auto shrink-0">{readMin || autoReadMin} min</span>
               </div>
             </div>
           </div>
