@@ -1,7 +1,12 @@
 "use client";
 
 import { useActionState, useMemo, useState } from "react";
-import { deleteArticle, saveArticle, type SaveState } from "@/app/admin/actions";
+import {
+  deleteArticle,
+  saveArticle,
+  unpublishArticle,
+  type SaveState,
+} from "@/app/admin/actions";
 import {
   FALLBACK_IMAGE_COUNT,
   GRADIENT_PRESETS,
@@ -59,8 +64,9 @@ export function ArticleEditor({
   const paragraphs = useMemo(() => bodyToParagraphs(body), [body]);
   const autoReadMin = useMemo(() => estimateReadMinutes(paragraphs), [paragraphs]);
 
-  // Un article en ligne ne se retouche plus : il est déjà devant les lecteurs.
-  const locked = article?.status === "published" && !publisher.is_admin;
+  const isLive = article?.status === "published";
+  // Un partenaire ne retouche pas un article déjà devant les lecteurs.
+  const locked = isLive && !publisher.is_admin;
 
   async function handleCoverUpload(file: File) {
     setUploading(true);
@@ -93,17 +99,31 @@ export function ArticleEditor({
         <h1 className="text-2xl font-bold tracking-tight text-zinc-900">
           {article ? "Modifier l'article" : "Nouvel article"}
         </h1>
+        {/* Hors du formulaire d'édition : un <form> ne s'imbrique pas. */}
         {article && (
-          <form action={deleteArticle}>
-            <input type="hidden" name="id" value={article.id} />
-            <button
-              type="submit"
-              disabled={locked}
-              className="rounded-full border border-zinc-300 px-3.5 py-1.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-50 disabled:opacity-40"
-            >
-              Supprimer
-            </button>
-          </form>
+          <div className="flex items-center gap-2">
+            {isLive && publisher.is_admin && (
+              <form action={unpublishArticle}>
+                <input type="hidden" name="id" value={article.id} />
+                <button
+                  type="submit"
+                  className="rounded-full border border-zinc-300 px-3.5 py-1.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-50"
+                >
+                  Retirer de l&apos;app
+                </button>
+              </form>
+            )}
+            <form action={deleteArticle}>
+              <input type="hidden" name="id" value={article.id} />
+              <button
+                type="submit"
+                disabled={locked}
+                className="rounded-full border border-zinc-300 px-3.5 py-1.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-50 disabled:opacity-40"
+              >
+                Supprimer
+              </button>
+            </form>
+          </div>
         )}
       </div>
 
@@ -266,25 +286,40 @@ export function ArticleEditor({
           )}
 
           <div className="flex flex-wrap items-center gap-3">
-            <button
-              type="submit"
-              name="intent"
-              value="draft"
-              disabled={pending || locked}
-              className="rounded-full border border-zinc-300 bg-white px-5 py-2.5 text-sm font-medium text-zinc-800 transition-colors hover:bg-zinc-50 disabled:opacity-50"
-            >
-              {pending ? "Enregistrement…" : "Enregistrer le brouillon"}
-            </button>
-            <button
-              type="submit"
-              name="intent"
-              value="pending"
-              disabled={pending || locked}
-              className="rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
-              style={{ backgroundColor: BRAND }}
-            >
-              {publisher.is_admin ? "Envoyer en relecture" : "Soumettre à Runly"}
-            </button>
+            {isLive && publisher.is_admin ? (
+              <button
+                type="submit"
+                name="intent"
+                value="published"
+                disabled={pending}
+                className="rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+                style={{ backgroundColor: BRAND }}
+              >
+                {pending ? "Enregistrement…" : "Enregistrer — reste en ligne"}
+              </button>
+            ) : (
+              <>
+                <button
+                  type="submit"
+                  name="intent"
+                  value="draft"
+                  disabled={pending || locked}
+                  className="rounded-full border border-zinc-300 bg-white px-5 py-2.5 text-sm font-medium text-zinc-800 transition-colors hover:bg-zinc-50 disabled:opacity-50"
+                >
+                  {pending ? "Enregistrement…" : "Enregistrer le brouillon"}
+                </button>
+                <button
+                  type="submit"
+                  name="intent"
+                  value={publisher.is_admin ? "published" : "pending"}
+                  disabled={pending || locked}
+                  className="rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+                  style={{ backgroundColor: BRAND }}
+                >
+                  {publisher.is_admin ? "Publier dans l'app" : "Soumettre à Runly"}
+                </button>
+              </>
+            )}
           </div>
         </div>
 

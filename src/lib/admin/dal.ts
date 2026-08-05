@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { cache } from "react";
+import { readSupabaseEnv } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { ARTICLE_COLUMNS, type ArticleRow, type Publisher } from "./types";
 
@@ -13,6 +14,10 @@ import { ARTICLE_COLUMNS, type ArticleRow, type Publisher } from "./types";
 
 /** L'utilisateur connecté — pas encore forcément un éditeur autorisé. */
 export const getCurrentUser = cache(async () => {
+  // Sans configuration, pas de session possible : la page de connexion affiche
+  // alors la marche à suivre, plutôt que de laisser remonter une exception.
+  if (!readSupabaseEnv()) return null;
+
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },

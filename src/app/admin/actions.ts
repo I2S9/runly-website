@@ -9,6 +9,7 @@ import {
   bodyToParagraphs,
   estimateReadMinutes,
   type ArticleLocale,
+  type ArticleStatus,
 } from "@/lib/admin/types";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -46,7 +47,16 @@ export async function saveArticle(
   const supabase = await createSupabaseServerClient();
 
   const id = text(formData, "id");
-  const intent = text(formData, "intent") === "pending" ? "pending" : "draft";
+
+  // 'published' n'est proposé qu'à la rédaction Runly ; pour un partenaire, le
+  // trigger en base le ramènerait de toute façon à 'pending'.
+  const requestedIntent = text(formData, "intent");
+  const intent: ArticleStatus =
+    requestedIntent === "published" && publisher.is_admin
+      ? "published"
+      : requestedIntent === "pending"
+        ? "pending"
+        : "draft";
 
   const title = text(formData, "title");
   const tag = text(formData, "tag");
@@ -65,7 +75,7 @@ export async function saveArticle(
 
   const paragraphs = bodyToParagraphs(body);
   if (paragraphs.length === 0) fieldErrors.body = "L'article est vide.";
-  if (intent === "pending" && paragraphs.length < 3) {
+  if (intent !== "draft" && paragraphs.length < 3) {
     fieldErrors.body = "Au moins trois paragraphes avant de soumettre.";
   }
 
@@ -116,6 +126,14 @@ export async function saveArticle(
     if (existing.status === "published" && !publisher.is_admin) {
       return { error: "Article déjà en ligne — contacte la rédaction Runly pour une correction." };
     }
+    // Corriger un article en ligne ne doit pas le faire disparaître de l'app :
+    // seul « Retirer de l'app » dépublie.
+    if (existing.status === "published" && publisher.is_admin) {
+      payload.status = "published";
+    } else if (intent === "published") {
+      payload.published_at = new Date().toISOString();
+    }
+
     // Une reprise après retour de relecture repart sans l'ancienne remarque.
     if (publisher.is_admin) payload.rejection_note = null;
 
