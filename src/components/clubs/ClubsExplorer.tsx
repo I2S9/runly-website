@@ -40,13 +40,16 @@ function titleCase(value: string) {
 export function ClubsExplorer({ clubs, tr }: { clubs: WebRunningClub[]; tr: ExplorerCopy }) {
   const [selected, setSelected] = useState<Record<string, string[]>>({});
 
-  // Options construites depuis les clubs réellement publiés : jamais de filtre vide.
   const groups = useMemo<FilterGroup[]>(() => {
-    const optionsFor = (field: keyof WebRunningClub, labels?: Record<string, string>) => {
-      const values = [...new Set(clubs.map((club) => String(club[field])).filter(Boolean))];
-      values.sort((a, b) => (labels?.[a] ?? a).localeCompare(labels?.[b] ?? b));
-      return values.map((value) => ({ value, label: labels?.[value] ?? titleCase(value) }));
-    };
+    // Villes : issues des clubs publiés, elles ne sont pas énumérables à l'avance.
+    const cities = [...new Set(clubs.map((club) => club.city).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b))
+      .map((value) => ({ value, label: titleCase(value) }));
+
+    // Niveau, type et badge : valeurs fixes du modèle de l'app, affichées en entier
+    // pour que la barre de filtres reste stable quel que soit le nombre de clubs.
+    const fixed = (labels: Record<string, string>) =>
+      Object.entries(labels).map(([value, label]) => ({ value, label }));
 
     return [
       {
@@ -54,12 +57,12 @@ export function ClubsExplorer({ clubs, tr }: { clubs: WebRunningClub[]; tr: Expl
         label: tr.cityGroup,
         searchable: true,
         searchPlaceholder: tr.citySearch,
-        options: optionsFor("city"),
+        options: cities,
       },
-      { key: "level", label: tr.levelGroup, options: optionsFor("paceLevel", tr.levels) },
-      { key: "focus", label: tr.focusGroup, options: optionsFor("focus", tr.focuses) },
-      { key: "badge", label: tr.badgeGroup, options: optionsFor("badgeKind", tr.badges) },
-    ].filter((group) => group.options.length > 1);
+      { key: "level", label: tr.levelGroup, options: fixed(tr.levels) },
+      { key: "focus", label: tr.focusGroup, options: fixed(tr.focuses) },
+      { key: "badge", label: tr.badgeGroup, options: fixed(tr.badges) },
+    ];
   }, [clubs, tr]);
 
   const visible = useMemo(() => {
@@ -75,14 +78,12 @@ export function ClubsExplorer({ clubs, tr }: { clubs: WebRunningClub[]; tr: Expl
 
   return (
     <div className="flex flex-col gap-6 sm:gap-8">
-      {groups.length > 0 && (
-        <ClubFilters
-          groups={groups}
-          tr={tr.filters}
-          selected={selected}
-          onSelectedChange={setSelected}
-        />
-      )}
+      <ClubFilters
+        groups={groups}
+        tr={tr.filters}
+        selected={selected}
+        onSelectedChange={setSelected}
+      />
 
       <p className="text-sm font-semibold text-zinc-500">
         {(visible.length === 1 ? tr.resultsOne : tr.resultsMany).replace(
