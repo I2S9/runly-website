@@ -5,9 +5,9 @@ const translations = {
     navbar: {
       ariaLabel: "Principale",
       links: [
-        { href: "#features", label: "Fonctionnalités" },
+        { href: "/#features", label: "Fonctionnalités" },
         { href: "/clubs", label: "Clubs" },
-        { href: "#rating", label: "Avis" },
+        { href: "/#rating", label: "Avis" },
         { href: "mailto:support@runly-app.com", label: "Contact" },
         { href: "/about", label: "À propos" },
       ],
@@ -165,9 +165,9 @@ const translations = {
     navbar: {
       ariaLabel: "Main",
       links: [
-        { href: "#features", label: "Features" },
+        { href: "/#features", label: "Features" },
         { href: "/clubs", label: "Clubs" },
-        { href: "#rating", label: "Reviews" },
+        { href: "/#rating", label: "Reviews" },
         { href: "mailto:support@runly-app.com", label: "Contact" },
         { href: "/about", label: "About" },
       ],

@@ -100,7 +100,7 @@ export function CommunityBanner({ tr }: { tr: Translations["communityBanner"] })
 /* ── Testimonial band: quote + tilted photos ── */
 export function TestimonialBand({ tr }: { tr: Translations["communityBanner"]["testimonial"] }) {
   return (
-    <section id="rating" className="w-full bg-white px-3 pb-4 pt-10 sm:px-5 sm:pb-5 sm:pt-12 lg:px-8 lg:pb-6 lg:pt-14">
+    <section id="rating" className="w-full scroll-mt-20 bg-white px-3 pb-4 pt-10 sm:scroll-mt-24 sm:px-5 sm:pb-5 sm:pt-12 lg:px-8 lg:pb-6 lg:pt-14">
       <div className="mx-auto w-full max-w-[82rem]">
         <div
           className="overflow-visible rounded-2xl sm:rounded-3xl"
