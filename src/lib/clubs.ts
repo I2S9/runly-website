@@ -57,23 +57,31 @@ function deriveLogoLabel(name: string) {
     .join("");
 }
 
+const CLUB_COLUMNS =
+  "id, name, district, city, member_count, pace_label, pace_level, focus, badge_kind, badge_label, logo_url, logo_label, banner_url, preview_photo_urls";
+
 /**
- * Clubs publiés depuis l'app (table `running_clubs`, même projet Supabase).
+ * Clubs publiés depuis l'app (même projet Supabase que l'application mobile).
  *
- * Renvoie une liste vide si la lecture est refusée : la politique RLS de la
- * table n'autorise aujourd'hui que le rôle `authenticated`, donc un visiteur
- * anonyme du site ne voit rien tant qu'une politique de lecture publique n'est
- * pas ajoutée côté app.
+ * Lecture via la vue `running_clubs_public`, seule visible sans compte : la RLS
+ * de la table `running_clubs` est réservée au rôle `authenticated`. Repli sur la
+ * table pour les environnements où la migration n'est pas encore appliquée.
  */
 export async function fetchRunningClubs(): Promise<WebRunningClub[]> {
   try {
     const supabase = await createSupabaseServerClient();
-    const { data, error } = await supabase
-      .from("running_clubs")
-      .select(
-        "id, name, district, city, member_count, pace_label, pace_level, focus, badge_kind, badge_label, logo_url, logo_label, banner_url, preview_photo_urls",
-      )
+
+    const fromView = await supabase
+      .from("running_clubs_public")
+      .select(CLUB_COLUMNS)
       .order("member_count", { ascending: false });
+
+    const { data, error } = fromView.error
+      ? await supabase
+          .from("running_clubs")
+          .select(CLUB_COLUMNS)
+          .order("member_count", { ascending: false })
+      : fromView;
 
     if (error || !data) return [];
 
