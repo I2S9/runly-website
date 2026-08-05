@@ -1,5 +1,6 @@
 import { getLocale } from "@/lib/locale";
-import { ClubFilters, type FilterGroup } from "@/components/clubs/ClubFilters";
+import type { FilterGroup } from "@/components/clubs/ClubFilters";
+import { ClubsExplorer } from "@/components/clubs/ClubsExplorer";
 
 const BRAND = "#4EA6F5";
 
@@ -18,6 +19,20 @@ const copy = {
       selectedCountMany: "{n} filtres actifs",
       noResult: "Aucun résultat",
     },
+    map: {
+      hint: "Fais glisser pour naviguer · molette pour zoomer · clique sur un point",
+      members: "membres",
+      empty: "Aucun club ne correspond à ces filtres.",
+      zoomIn: "Zoomer",
+      zoomOut: "Dézoomer",
+      reset: "Recentrer la carte",
+      loading: "Chargement de la carte…",
+    },
+    resultsOne: "1 club sur la carte",
+    resultsMany: "{n} clubs sur la carte",
+    members: "membres",
+    close: "Fermer",
+    seeClub: "Voir le club",
     groups: [
       {
         key: "city",
@@ -41,6 +56,16 @@ const copy = {
           { value: "lausanne", label: "Lausanne" },
           { value: "geneve", label: "Genève" },
           { value: "bruxelles", label: "Bruxelles" },
+          { value: "london", label: "Londres" },
+          { value: "barcelona", label: "Barcelone" },
+          { value: "berlin", label: "Berlin" },
+          { value: "lisbon", label: "Lisbonne" },
+          { value: "montreal", label: "Montréal" },
+          { value: "newyork", label: "New York" },
+          { value: "capetown", label: "Le Cap" },
+          { value: "tokyo", label: "Tokyo" },
+          { value: "sydney", label: "Sydney" },
+          { value: "saopaulo", label: "São Paulo" },
         ],
       },
       {
@@ -140,6 +165,20 @@ const copy = {
       selectedCountMany: "{n} active filters",
       noResult: "No result",
     },
+    map: {
+      hint: "Drag to move · scroll to zoom · tap a dot",
+      members: "members",
+      empty: "No club matches these filters.",
+      zoomIn: "Zoom in",
+      zoomOut: "Zoom out",
+      reset: "Recenter the map",
+      loading: "Loading the map…",
+    },
+    resultsOne: "1 club on the map",
+    resultsMany: "{n} clubs on the map",
+    members: "members",
+    close: "Close",
+    seeClub: "View club",
     groups: [
       {
         key: "city",
@@ -163,6 +202,16 @@ const copy = {
           { value: "lausanne", label: "Lausanne" },
           { value: "geneve", label: "Geneva" },
           { value: "bruxelles", label: "Brussels" },
+          { value: "london", label: "London" },
+          { value: "barcelona", label: "Barcelona" },
+          { value: "berlin", label: "Berlin" },
+          { value: "lisbon", label: "Lisbon" },
+          { value: "montreal", label: "Montreal" },
+          { value: "newyork", label: "New York" },
+          { value: "capetown", label: "Cape Town" },
+          { value: "tokyo", label: "Tokyo" },
+          { value: "sydney", label: "Sydney" },
+          { value: "saopaulo", label: "São Paulo" },
         ],
       },
       {
@@ -279,7 +328,18 @@ export default async function ClubsPage() {
           </header>
 
           <section className="mt-8 sm:mt-10" aria-label={c.title}>
-            <ClubFilters groups={c.groups} tr={c.filters} />
+            <ClubsExplorer
+              groups={c.groups}
+              tr={{
+                filters: c.filters,
+                map: c.map,
+                resultsOne: c.resultsOne,
+                resultsMany: c.resultsMany,
+                members: c.members,
+                close: c.close,
+                seeClub: c.seeClub,
+              }}
+            />
           </section>
         </div>
       </div>

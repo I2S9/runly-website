@@ -11,6 +11,9 @@ npm run dev
 
 Ouvre [http://localhost:3000](http://localhost:3000).
 
+Le back-office de rédaction (`/admin`) a besoin de variables Supabase : copier
+`.env.example` en `.env.local`. Voir [ADMIN.md](./ADMIN.md).
+
 ## Scripts
 
 - `npm run build` — build production

@@ -53,9 +53,18 @@ function CloseIcon() {
   );
 }
 
-export function ClubFilters({ groups, tr }: { groups: readonly FilterGroup[]; tr: FilterCopy }) {
+export function ClubFilters({
+  groups,
+  tr,
+  selected,
+  onSelectedChange,
+}: {
+  groups: readonly FilterGroup[];
+  tr: FilterCopy;
+  selected: Record<string, string[]>;
+  onSelectedChange: (next: Record<string, string[]>) => void;
+}) {
   const [openKey, setOpenKey] = useState<string | null>(null);
-  const [selected, setSelected] = useState<Record<string, string[]>>({});
   const [queries, setQueries] = useState<Record<string, string>>({});
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -79,13 +88,11 @@ export function ClubFilters({ groups, tr }: { groups: readonly FilterGroup[]; tr
   }, [openKey]);
 
   function toggle(groupKey: string, value: string) {
-    setSelected((prev) => {
-      const current = prev[groupKey] ?? [];
-      const next = current.includes(value)
-        ? current.filter((v) => v !== value)
-        : [...current, value];
-      return { ...prev, [groupKey]: next };
-    });
+    const current = selected[groupKey] ?? [];
+    const next = current.includes(value)
+      ? current.filter((v) => v !== value)
+      : [...current, value];
+    onSelectedChange({ ...selected, [groupKey]: next });
   }
 
   const totalSelected = Object.values(selected).reduce((sum, values) => sum + values.length, 0);
@@ -180,7 +187,7 @@ export function ClubFilters({ groups, tr }: { groups: readonly FilterGroup[]; tr
                     <div className="border-t border-zinc-100 px-3 py-2.5">
                       <button
                         type="button"
-                        onClick={() => setSelected((prev) => ({ ...prev, [group.key]: [] }))}
+                        onClick={() => onSelectedChange({ ...selected, [group.key]: [] })}
                         className="text-sm font-semibold text-[#4EA6F5] hover:underline"
                       >
                         {tr.clearGroup}
@@ -221,7 +228,7 @@ export function ClubFilters({ groups, tr }: { groups: readonly FilterGroup[]; tr
           )}
           <button
             type="button"
-            onClick={() => setSelected({})}
+            onClick={() => onSelectedChange({})}
             className="text-sm font-semibold text-[#4EA6F5] hover:underline"
           >
             {tr.reset}
