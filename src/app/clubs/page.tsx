@@ -1,5 +1,5 @@
 import { getLocale } from "@/lib/locale";
-import type { FilterGroup } from "@/components/clubs/ClubFilters";
+import { fetchRunningClubs } from "@/lib/clubs";
 import { ClubsExplorer } from "@/components/clubs/ClubsExplorer";
 
 const BRAND = "#4EA6F5";
@@ -11,286 +11,90 @@ const NAV_WIDTH = "mx-auto w-full min-w-0 max-w-[82rem]";
 const copy = {
   fr: {
     title: "Découvre tous les running clubs autour de toi",
-    lead: "Filtre par ville, jour, allure ou ambiance pour trouver le collectif qui te correspond.",
-    filters: {
-      reset: "Tout effacer",
-      clearGroup: "Effacer ce filtre",
-      selectedCountOne: "1 filtre actif",
-      selectedCountMany: "{n} filtres actifs",
-      noResult: "Aucun résultat",
+    lead: "Les clubs publiés depuis l'application Runly, avec leur allure, leur quartier et leur communauté.",
+    empty: "Aucun club n'est encore publié. Les clubs créés depuis l'application apparaîtront ici.",
+    explorer: {
+      filters: {
+        reset: "Tout effacer",
+        clearGroup: "Effacer ce filtre",
+        selectedCountOne: "1 filtre actif",
+        selectedCountMany: "{n} filtres actifs",
+        noResult: "Aucun résultat",
+      },
+      card: {
+        membersOne: "{n} membre",
+        membersMany: "{n} membres",
+        pace: "Allure {pace}",
+      },
+      cityGroup: "Ville",
+      citySearch: "Rechercher une ville",
+      levelGroup: "Niveau",
+      focusGroup: "Type de course",
+      badgeGroup: "Badge",
+      levels: {
+        beginner: "Débutant",
+        mixed: "Tous niveaux",
+        performance: "Performance",
+      },
+      focuses: {
+        road: "Route",
+        trail: "Trail",
+      },
+      badges: {
+        active: "Actif",
+        new: "Nouveau",
+        nearby: "À proximité",
+      },
+      resultsOne: "1 club",
+      resultsMany: "{n} clubs",
+      noMatch: "Aucun club ne correspond à ces filtres.",
     },
-    card: {
-      members: "membres",
-      moreTags: "+{n}",
-    },
-    resultsOne: "1 club",
-    resultsMany: "{n} clubs",
-    empty: "Aucun club ne correspond à ces filtres.",
-    groups: [
-      {
-        key: "city",
-        label: "Ville",
-        searchable: true,
-        searchPlaceholder: "Rechercher une ville",
-        options: [
-          { value: "paris", label: "Paris" },
-          { value: "lyon", label: "Lyon" },
-          { value: "marseille", label: "Marseille" },
-          { value: "toulouse", label: "Toulouse" },
-          { value: "bordeaux", label: "Bordeaux" },
-          { value: "lille", label: "Lille" },
-          { value: "nantes", label: "Nantes" },
-          { value: "nice", label: "Nice" },
-          { value: "rennes", label: "Rennes" },
-          { value: "strasbourg", label: "Strasbourg" },
-          { value: "montpellier", label: "Montpellier" },
-          { value: "grenoble", label: "Grenoble" },
-          { value: "chambery", label: "Chambéry" },
-          { value: "lausanne", label: "Lausanne" },
-          { value: "geneve", label: "Genève" },
-          { value: "bruxelles", label: "Bruxelles" },
-          { value: "london", label: "Londres" },
-          { value: "barcelona", label: "Barcelone" },
-          { value: "berlin", label: "Berlin" },
-          { value: "lisbon", label: "Lisbonne" },
-          { value: "montreal", label: "Montréal" },
-          { value: "newyork", label: "New York" },
-          { value: "capetown", label: "Le Cap" },
-          { value: "tokyo", label: "Tokyo" },
-          { value: "sydney", label: "Sydney" },
-          { value: "saopaulo", label: "São Paulo" },
-        ],
-      },
-      {
-        key: "day",
-        label: "Jour de sortie",
-        options: [
-          { value: "mon", label: "Lundi" },
-          { value: "tue", label: "Mardi" },
-          { value: "wed", label: "Mercredi" },
-          { value: "thu", label: "Jeudi" },
-          { value: "fri", label: "Vendredi" },
-          { value: "sat", label: "Samedi" },
-          { value: "sun", label: "Dimanche" },
-        ],
-      },
-      {
-        key: "moment",
-        label: "Moment",
-        options: [
-          { value: "morning", label: "Matin", icon: "🌅" },
-          { value: "noon", label: "Pause déj", icon: "🥪" },
-          { value: "evening", label: "Soirée", icon: "🌙" },
-          { value: "weekend", label: "Week-end", icon: "🗓️" },
-        ],
-      },
-      {
-        key: "session",
-        label: "Type de séance",
-        options: [
-          { value: "road", label: "Route", icon: "🛣️" },
-          { value: "trail", label: "Trail", icon: "⛰️" },
-          { value: "track", label: "Piste / fractionné", icon: "🏟️" },
-          { value: "long-run", label: "Sortie longue", icon: "🕒" },
-          { value: "easy", label: "Endurance fondamentale", icon: "🌿" },
-          { value: "strength", label: "Renfo & mobilité", icon: "💪" },
-        ],
-      },
-      {
-        key: "level",
-        label: "Niveau & allure",
-        options: [
-          { value: "beginner", label: "Débutant" },
-          { value: "all", label: "Tous niveaux" },
-          { value: "intermediate", label: "Intermédiaire" },
-          { value: "advanced", label: "Confirmé" },
-          { value: "pace-slow", label: "Plus de 6:30 min/km" },
-          { value: "pace-mid", label: "5:30 – 6:30 min/km" },
-          { value: "pace-fast", label: "4:30 – 5:30 min/km" },
-          { value: "pace-elite", label: "Moins de 4:30 min/km" },
-        ],
-      },
-      {
-        key: "distance",
-        label: "Distance",
-        options: [
-          { value: "5k", label: "5 km" },
-          { value: "10k", label: "10 km" },
-          { value: "half", label: "Semi-marathon" },
-          { value: "marathon", label: "Marathon" },
-          { value: "ultra", label: "Ultra" },
-        ],
-      },
-      {
-        key: "audience",
-        label: "Public",
-        options: [
-          { value: "mixed", label: "Mixte" },
-          { value: "women", label: "Femmes" },
-          { value: "non-binary", label: "Personnes non binaires" },
-          { value: "students", label: "Étudiants" },
-          { value: "seniors", label: "Seniors" },
-          { value: "juniors", label: "Enfants & juniors" },
-          { value: "parents", label: "Parents" },
-        ],
-      },
-      {
-        key: "vibe",
-        label: "Ambiance",
-        options: [
-          { value: "chill", label: "Cool & sociale", icon: "😄" },
-          { value: "perf", label: "Performance", icon: "🎯" },
-          { value: "coached", label: "Encadrée par un coach", icon: "📣" },
-          { value: "afterwork", label: "Afterwork / verre après", icon: "🍹" },
-          { value: "charity", label: "Cause caritative", icon: "🤝" },
-          { value: "free", label: "Gratuit", icon: "🎟️" },
-        ],
-      },
-    ] satisfies readonly FilterGroup[],
   },
   en: {
     title: "Discover every running club around you",
-    lead: "Filter by city, day, pace or vibe to find the crew that fits you.",
-    filters: {
-      reset: "Clear all",
-      clearGroup: "Clear this filter",
-      selectedCountOne: "1 active filter",
-      selectedCountMany: "{n} active filters",
-      noResult: "No result",
+    lead: "Clubs published from the Runly app, with their pace, neighbourhood and community.",
+    empty: "No club has been published yet. Clubs created in the app will show up here.",
+    explorer: {
+      filters: {
+        reset: "Clear all",
+        clearGroup: "Clear this filter",
+        selectedCountOne: "1 active filter",
+        selectedCountMany: "{n} active filters",
+        noResult: "No result",
+      },
+      card: {
+        membersOne: "{n} member",
+        membersMany: "{n} members",
+        pace: "{pace} pace",
+      },
+      cityGroup: "City",
+      citySearch: "Search a city",
+      levelGroup: "Level",
+      focusGroup: "Run type",
+      badgeGroup: "Badge",
+      levels: {
+        beginner: "Beginner",
+        mixed: "All levels",
+        performance: "Performance",
+      },
+      focuses: {
+        road: "Road",
+        trail: "Trail",
+      },
+      badges: {
+        active: "Active",
+        new: "New",
+        nearby: "Nearby",
+      },
+      resultsOne: "1 club",
+      resultsMany: "{n} clubs",
+      noMatch: "No club matches these filters.",
     },
-    card: {
-      members: "members",
-      moreTags: "+{n}",
-    },
-    resultsOne: "1 club",
-    resultsMany: "{n} clubs",
-    empty: "No club matches these filters.",
-    groups: [
-      {
-        key: "city",
-        label: "City",
-        searchable: true,
-        searchPlaceholder: "Search a city",
-        options: [
-          { value: "paris", label: "Paris" },
-          { value: "lyon", label: "Lyon" },
-          { value: "marseille", label: "Marseille" },
-          { value: "toulouse", label: "Toulouse" },
-          { value: "bordeaux", label: "Bordeaux" },
-          { value: "lille", label: "Lille" },
-          { value: "nantes", label: "Nantes" },
-          { value: "nice", label: "Nice" },
-          { value: "rennes", label: "Rennes" },
-          { value: "strasbourg", label: "Strasbourg" },
-          { value: "montpellier", label: "Montpellier" },
-          { value: "grenoble", label: "Grenoble" },
-          { value: "chambery", label: "Chambéry" },
-          { value: "lausanne", label: "Lausanne" },
-          { value: "geneve", label: "Geneva" },
-          { value: "bruxelles", label: "Brussels" },
-          { value: "london", label: "London" },
-          { value: "barcelona", label: "Barcelona" },
-          { value: "berlin", label: "Berlin" },
-          { value: "lisbon", label: "Lisbon" },
-          { value: "montreal", label: "Montreal" },
-          { value: "newyork", label: "New York" },
-          { value: "capetown", label: "Cape Town" },
-          { value: "tokyo", label: "Tokyo" },
-          { value: "sydney", label: "Sydney" },
-          { value: "saopaulo", label: "São Paulo" },
-        ],
-      },
-      {
-        key: "day",
-        label: "Run day",
-        options: [
-          { value: "mon", label: "Monday" },
-          { value: "tue", label: "Tuesday" },
-          { value: "wed", label: "Wednesday" },
-          { value: "thu", label: "Thursday" },
-          { value: "fri", label: "Friday" },
-          { value: "sat", label: "Saturday" },
-          { value: "sun", label: "Sunday" },
-        ],
-      },
-      {
-        key: "moment",
-        label: "Time of day",
-        options: [
-          { value: "morning", label: "Morning", icon: "🌅" },
-          { value: "noon", label: "Lunch break", icon: "🥪" },
-          { value: "evening", label: "Evening", icon: "🌙" },
-          { value: "weekend", label: "Weekend", icon: "🗓️" },
-        ],
-      },
-      {
-        key: "session",
-        label: "Session type",
-        options: [
-          { value: "road", label: "Road", icon: "🛣️" },
-          { value: "trail", label: "Trail", icon: "⛰️" },
-          { value: "track", label: "Track / intervals", icon: "🏟️" },
-          { value: "long-run", label: "Long run", icon: "🕒" },
-          { value: "easy", label: "Easy run", icon: "🌿" },
-          { value: "strength", label: "Strength & mobility", icon: "💪" },
-        ],
-      },
-      {
-        key: "level",
-        label: "Level & pace",
-        options: [
-          { value: "beginner", label: "Beginner" },
-          { value: "all", label: "All levels" },
-          { value: "intermediate", label: "Intermediate" },
-          { value: "advanced", label: "Advanced" },
-          { value: "pace-slow", label: "Over 6:30 min/km" },
-          { value: "pace-mid", label: "5:30 – 6:30 min/km" },
-          { value: "pace-fast", label: "4:30 – 5:30 min/km" },
-          { value: "pace-elite", label: "Under 4:30 min/km" },
-        ],
-      },
-      {
-        key: "distance",
-        label: "Distance",
-        options: [
-          { value: "5k", label: "5 km" },
-          { value: "10k", label: "10 km" },
-          { value: "half", label: "Half marathon" },
-          { value: "marathon", label: "Marathon" },
-          { value: "ultra", label: "Ultra" },
-        ],
-      },
-      {
-        key: "audience",
-        label: "Who it's for",
-        options: [
-          { value: "mixed", label: "Everyone" },
-          { value: "women", label: "Women" },
-          { value: "non-binary", label: "Non-binary people" },
-          { value: "students", label: "Students" },
-          { value: "seniors", label: "Seniors" },
-          { value: "juniors", label: "Kids & juniors" },
-          { value: "parents", label: "Parents" },
-        ],
-      },
-      {
-        key: "vibe",
-        label: "Vibe",
-        options: [
-          { value: "chill", label: "Chill & social", icon: "😄" },
-          { value: "perf", label: "Performance", icon: "🎯" },
-          { value: "coached", label: "Coach-led", icon: "📣" },
-          { value: "afterwork", label: "Afterwork drinks", icon: "🍹" },
-          { value: "charity", label: "Charity cause", icon: "🤝" },
-          { value: "free", label: "Free", icon: "🎟️" },
-        ],
-      },
-    ] satisfies readonly FilterGroup[],
   },
 } as const;
 
 export default async function ClubsPage() {
-  const locale = await getLocale();
+  const [locale, clubs] = await Promise.all([getLocale(), fetchRunningClubs()]);
   const c = copy[locale];
 
   return (
@@ -314,16 +118,13 @@ export default async function ClubsPage() {
           </header>
 
           <section className="mt-8 sm:mt-10" aria-label={c.title}>
-            <ClubsExplorer
-              groups={c.groups}
-              tr={{
-                filters: c.filters,
-                card: c.card,
-                resultsOne: c.resultsOne,
-                resultsMany: c.resultsMany,
-                empty: c.empty,
-              }}
-            />
+            {clubs.length === 0 ? (
+              <p className="rounded-3xl border border-dashed border-zinc-300 px-6 py-14 text-center text-sm font-medium text-zinc-500">
+                {c.empty}
+              </p>
+            ) : (
+              <ClubsExplorer clubs={clubs} tr={c.explorer} />
+            )}
           </section>
         </div>
       </div>
