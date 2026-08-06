@@ -6,6 +6,9 @@ import type { Translations } from "@/i18n/translations";
 
 const BRAND = "#4EA6F5";
 
+const APP_STORE_URL =
+  "https://apps.apple.com/us/app/runly-partenaires-de-running/id6781136588?l=fr-FR";
+
 type Props = {
   tr: {
     downloadAppStore: string;
@@ -49,9 +52,10 @@ export function DownloadButtons({ tr, size = "lg", layout = "row" }: Props) {
     <>
       {/* Trigger buttons */}
       <div className={wrapClass}>
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
+        <a
+          href={APP_STORE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex shrink-0 cursor-pointer leading-none"
           aria-label={tr.downloadAppStore}
         >
@@ -63,7 +67,7 @@ export function DownloadButtons({ tr, size = "lg", layout = "row" }: Props) {
             className={imgClass}
             unoptimized
           />
-        </button>
+        </a>
         <button
           type="button"
           onClick={() => setOpen(true)}
