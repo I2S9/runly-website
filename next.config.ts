@@ -21,6 +21,16 @@ const nextConfig: NextConfig = {
         ]
       : [],
   },
+  async rewrites() {
+    return [
+      // Apple impose ce chemin exact. Le route handler vit sous `well-known/`
+      // (sans point) : l'App Router ignore les dossiers commençant par un point.
+      {
+        source: "/.well-known/apple-app-site-association",
+        destination: "/well-known/apple-app-site-association",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -79,5 +79,9 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|branding|images).*)"],
+  // `.well-known` est exclu : le fichier Apple doit être servi tel quel, sans
+  // cookie de session ni en-tête de locale posés par le proxy.
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|branding|images|\\.well-known|well-known).*)",
+  ],
 };

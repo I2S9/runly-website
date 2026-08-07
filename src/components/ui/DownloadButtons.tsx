@@ -3,11 +3,9 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import type { Translations } from "@/i18n/translations";
+import { APP_STORE_URL } from "@/lib/app-links";
 
 const BRAND = "#4EA6F5";
-
-const APP_STORE_URL =
-  "https://apps.apple.com/us/app/runly-partenaires-de-running/id6781136588?l=fr-FR";
 
 type Props = {
   tr: {
