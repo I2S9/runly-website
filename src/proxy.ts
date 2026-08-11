@@ -2,6 +2,13 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import type { Locale } from "@/i18n/translations";
+import { APP_STORE_URL } from "@/lib/app-links";
+import {
+  STORE_REDIRECT_COOKIE,
+  STORE_REDIRECT_COOKIE_OPTIONS,
+  isStoreRedirectOptOut,
+  shouldRedirectToStore,
+} from "@/lib/store-redirect";
 import { readSupabaseEnv } from "@/lib/supabase/env";
 
 const FRENCH_RE = /^fr\b/i;
@@ -39,6 +46,27 @@ export async function proxy(request: NextRequest) {
     path: "/",
     sameSite: "lax",
   });
+
+  // Accueil ouverte depuis un iPhone : on envoie directement sur l'App Store.
+  // Le cookie est posé dans les deux cas (renvoi effectif ou `?stay=1`) pour
+  // qu'un retour depuis l'App Store affiche bien le site au lieu de reboucler.
+  const optOut = isStoreRedirectOptOut(request);
+  const goToStore = shouldRedirectToStore(request);
+  if (optOut || goToStore) {
+    response.cookies.set(
+      STORE_REDIRECT_COOKIE,
+      "1",
+      STORE_REDIRECT_COOKIE_OPTIONS,
+    );
+    if (goToStore) {
+      const redirect = redirectKeepingCookies(request, APP_STORE_URL, response);
+      // Réponse dépendante du User-Agent et porteuse d'un cookie : aucun CDN
+      // ne doit la resservir à un autre visiteur.
+      redirect.headers.set("Cache-Control", "no-store");
+      redirect.headers.set("Vary", "User-Agent, Cookie");
+      return redirect;
+    }
+  }
 
   if (!path.startsWith("/admin")) return response;
 
