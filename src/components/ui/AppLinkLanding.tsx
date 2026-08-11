@@ -5,7 +5,7 @@ import { getLocale } from "@/lib/locale";
 
 const BRAND = "#4EA6F5";
 
-export type AppLinkKind = "profile" | "post" | "group";
+export type AppLinkKind = "profile" | "post" | "group" | "club";
 
 /**
  * Page d'atterrissage des liens partagés (QR d'invitation, partage de post…).
@@ -21,12 +21,14 @@ const content = {
       profile: "Rejoins ce coureur sur Runly",
       post: "Ce post t'attend sur Runly",
       group: "Rejoins ce groupe sur Runly",
+      club: "Rejoins ce running club sur Runly",
     },
     bodies: {
       profile:
         "Télécharge Runly pour ouvrir ce profil, envoyer une demande d'ami et organiser votre prochaine sortie ensemble.",
       post: "Télécharge Runly pour voir ce post, réagir et suivre les sorties de la communauté.",
       group: "Télécharge Runly pour rejoindre ce groupe et courir avec ses membres.",
+      club: "Télécharge Runly pour découvrir ce running club, voir ses prochaines sorties et le rejoindre.",
     },
     openApp: "J'ai déjà l'app — ouvrir dans Runly",
     androidNote: "Runly arrive très bientôt sur Android.",
@@ -39,12 +41,14 @@ const content = {
       profile: "Join this runner on Runly",
       post: "This post is waiting for you on Runly",
       group: "Join this group on Runly",
+      club: "Join this running club on Runly",
     },
     bodies: {
       profile:
         "Download Runly to open this profile, send a friend request and plan your next run together.",
       post: "Download Runly to see this post, react and follow the community's runs.",
       group: "Download Runly to join this group and run with its members.",
+      club: "Download Runly to discover this running club, see its next runs and join it.",
     },
     openApp: "Already have the app — open in Runly",
     androidNote: "Runly is coming to Android very soon.",

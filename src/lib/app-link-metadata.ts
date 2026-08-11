@@ -21,6 +21,10 @@ const meta = {
       title: "Rejoins ce groupe sur Runly",
       description: "Ouvre ce groupe dans Runly pour courir avec ses membres.",
     },
+    club: {
+      title: "Rejoins ce running club sur Runly",
+      description: "Ouvre ce club dans Runly pour voir ses sorties et le rejoindre.",
+    },
   },
   en: {
     profile: {
@@ -34,6 +38,10 @@ const meta = {
     group: {
       title: "Join this group on Runly",
       description: "Open this group in Runly to run with its members.",
+    },
+    club: {
+      title: "Join this running club on Runly",
+      description: "Open this club in Runly to see its runs and join it.",
     },
   },
 } as const;

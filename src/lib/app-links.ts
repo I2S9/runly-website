@@ -28,8 +28,9 @@ export const APP_SCHEME = "runly";
 export const SITE_ORIGIN = "https://runly.app";
 
 /**
- * Chemins que l'app sait résoudre (`expo/app/u`, `app/p`, `app/join`).
- * Toute entrée ajoutée ici doit aussi exister sur le site : sans ça, un
- * visiteur sans l'app tombe sur un 404 au lieu d'une page de téléchargement.
+ * Chemins que l'app sait résoudre (`expo/app/u`, `app/p`, `app/join`,
+ * `app/club`). Toute entrée ajoutée ici doit aussi exister sur le site : sans
+ * ça, un visiteur sans l'app tombe sur un 404 au lieu d'une page de
+ * téléchargement.
  */
-export const UNIVERSAL_LINK_PATHS = ["/u/*", "/p/*", "/join/*"] as const;
+export const UNIVERSAL_LINK_PATHS = ["/u/*", "/p/*", "/join/*", "/club/*"] as const;
