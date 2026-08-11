@@ -4,10 +4,11 @@ import type { NextRequest } from "next/server";
 import type { Locale } from "@/i18n/translations";
 import { APP_STORE_URL } from "@/lib/app-links";
 import {
+  DOWNLOAD_PATH,
   STORE_REDIRECT_COOKIE,
   STORE_REDIRECT_COOKIE_OPTIONS,
   isStoreRedirectOptOut,
-  shouldRedirectToStore,
+  storeRedirectMode,
 } from "@/lib/store-redirect";
 import { readSupabaseEnv } from "@/lib/supabase/env";
 
@@ -47,25 +48,37 @@ export async function proxy(request: NextRequest) {
     sameSite: "lax",
   });
 
-  // Accueil ouverte depuis un iPhone : on envoie directement sur l'App Store.
-  // Le cookie est posé dans les deux cas (renvoi effectif ou `?stay=1`) pour
-  // qu'un retour depuis l'App Store affiche bien le site au lieu de reboucler.
-  const optOut = isStoreRedirectOptOut(request);
-  const goToStore = shouldRedirectToStore(request);
-  if (optOut || goToStore) {
-    response.cookies.set(
-      STORE_REDIRECT_COOKIE,
-      "1",
-      STORE_REDIRECT_COOKIE_OPTIONS,
-    );
-    if (goToStore) {
-      const redirect = redirectKeepingCookies(request, APP_STORE_URL, response);
-      // Réponse dépendante du User-Agent et porteuse d'un cookie : aucun CDN
-      // ne doit la resservir à un autre visiteur.
-      redirect.headers.set("Cache-Control", "no-store");
-      redirect.headers.set("Vary", "User-Agent, Cookie");
-      return redirect;
+  // `?stay=1` : le seul moyen d'ouvrir l'accueil depuis un iPhone. Le cookie
+  // prolonge l'échappatoire sur la session, sinon il faudrait le retaper à
+  // chaque retour sur `/`.
+  if (isStoreRedirectOptOut(request)) {
+    response.cookies.set(STORE_REDIRECT_COOKIE, "1", STORE_REDIRECT_COOKIE_OPTIONS);
+  }
+
+  // Accueil ouverte depuis un iPhone : direction l'App Store, à chaque fois.
+  const mode = storeRedirectMode(request);
+  if (mode !== "none") {
+    let target: NextResponse;
+    if (mode === "interstitial") {
+      // Dans un navigateur intégré (bio Instagram / TikTok), une redirection
+      // HTTP se contente souvent d'afficher la fiche Apple dans la webview.
+      // `/download` force la sortie côté client et garde un bouton de secours.
+      // L'URL affichée reste `runly.app` : c'est une réécriture, pas un renvoi.
+      const downloadHeaders = new Headers(requestHeaders);
+      downloadHeaders.set("x-pathname", DOWNLOAD_PATH);
+      target = NextResponse.rewrite(new URL(DOWNLOAD_PATH, request.url), {
+        request: { headers: downloadHeaders },
+      });
+    } else {
+      target = NextResponse.redirect(APP_STORE_URL);
     }
+
+    for (const cookie of response.cookies.getAll()) target.cookies.set(cookie);
+    // Réponse dépendante du User-Agent : aucun CDN ne doit la resservir
+    // telle quelle à un visiteur desktop.
+    target.headers.set("Cache-Control", "no-store");
+    target.headers.set("Vary", "User-Agent, Cookie");
+    return target;
   }
 
   if (!path.startsWith("/admin")) return response;

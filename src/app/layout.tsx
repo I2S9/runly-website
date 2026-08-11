@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { getLocale } from "@/lib/locale";
+import { DOWNLOAD_PATH } from "@/lib/store-redirect";
 import { t } from "@/i18n/translations";
 import "./globals.css";
 
@@ -50,8 +51,10 @@ export default async function RootLayout({
   const tr = t(locale);
 
   // Le back-office est une interface de travail : ni navbar marketing, ni footer.
+  // `/download` est une page de transit vers l'App Store : tout ce qui invite à
+  // rester sur le site y jouerait contre l'objectif.
   const pathname = (await headers()).get("x-pathname") ?? "";
-  const isAdmin = pathname.startsWith("/admin");
+  const isBare = pathname.startsWith("/admin") || pathname.startsWith(DOWNLOAD_PATH);
 
   return (
     <html
@@ -59,9 +62,9 @@ export default async function RootLayout({
       className={`${bricolageGrotesque.variable} ${geistMono.variable} h-full bg-white antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white font-sans">
-        {!isAdmin && <Navbar tr={tr.navbar} trModal={tr.downloadModal} locale={locale} />}
+        {!isBare && <Navbar tr={tr.navbar} trModal={tr.downloadModal} locale={locale} />}
         {children}
-        {!isAdmin && (
+        {!isBare && (
           <Footer locale={locale} tr={tr.footer} trModal={tr.downloadModal} trBlogModal={tr.blogModal} />
         )}
       </body>
