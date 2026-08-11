@@ -6,9 +6,9 @@ import { getLocale } from "@/lib/locale";
 /**
  * Page de sortie vers l'App Store.
  *
- * Servie par le proxy à la place de l'accueil quand un iPhone ouvre `runly.app`
+ * Servie par le proxy à la place de l'accueil quand un iPhone ouvre `runly-app.com`
  * depuis un navigateur intégré (bio Instagram / TikTok) — l'URL affichée reste
- * `runly.app`. Utilisable aussi directement : `runly.app/download`.
+ * `runly-app.com`. Utilisable aussi directement : `runly-app.com/download`.
  */
 const content = {
   fr: {

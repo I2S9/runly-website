@@ -63,7 +63,7 @@ export async function proxy(request: NextRequest) {
       // Dans un navigateur intégré (bio Instagram / TikTok), une redirection
       // HTTP se contente souvent d'afficher la fiche Apple dans la webview.
       // `/download` force la sortie côté client et garde un bouton de secours.
-      // L'URL affichée reste `runly.app` : c'est une réécriture, pas un renvoi.
+      // L'URL affichée reste `runly-app.com` : c'est une réécriture, pas un renvoi.
       const downloadHeaders = new Headers(requestHeaders);
       downloadHeaders.set("x-pathname", DOWNLOAD_PATH);
       target = NextResponse.rewrite(new URL(DOWNLOAD_PATH, request.url), {

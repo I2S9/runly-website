@@ -7,7 +7,7 @@ import type { NextRequest } from "next/server";
  * systématique — aucun quota, aucune mémoire d'un passage précédent.
  *
  * Volontairement limité à la page d'accueil : les pages légales, les pages
- * d'atterrissage des liens partagés (`/u`, `/p`, `/join`) et le back-office
+ * d'atterrissage des liens partagés (`/u`, `/p`, `/join`, `/club`) et le back-office
  * doivent rester consultables au téléphone — Apple exige d'ailleurs que la
  * politique de confidentialité soit accessible depuis un navigateur.
  *

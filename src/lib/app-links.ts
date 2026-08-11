@@ -3,7 +3,7 @@
  *
  * `IOS_APP_ID` (Team ID + bundle identifier) est ce que le fichier
  * `apple-app-site-association` déclare : c'est lui qui autorise iOS à ouvrir
- * l'app quand on scanne un QR pointant sur runly.app.
+ * l'app quand on scanne un QR pointant sur runly-app.com.
  */
 
 /** Team ID Apple + bundle identifier (voir `expo/app.json`). */
@@ -25,7 +25,14 @@ export const APP_STORE_SCHEME_URL = `itms-apps://apps.apple.com/app/id${IOS_APP_
 /** Scheme privé de l'app — secours quand l'Universal Link n'a pas pris. */
 export const APP_SCHEME = "runly";
 
-export const SITE_ORIGIN = "https://runly.app";
+/**
+ * Origine canonique du site — celle qui sert réellement les pages.
+ *
+ * `www` et pas l'apex : `runly-app.com` renvoie en 307 vers `www`, or Apple
+ * refuse toute redirection pour aller chercher `apple-app-site-association`.
+ * Le domaine `runly.app` n'appartient pas au projet, ne pas le remettre ici.
+ */
+export const SITE_ORIGIN = "https://www.runly-app.com";
 
 /**
  * Chemins que l'app sait résoudre (`expo/app/u`, `app/p`, `app/join`,
