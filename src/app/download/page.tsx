@@ -17,7 +17,7 @@ import { getLocale } from "@/lib/locale";
 /** La consigne est coupée en deux : le bouton ⋯ s'insère entre les deux moitiés. */
 const content = {
   fr: {
-    before: "Touche les trois points en haut à droite",
+    before: "Clic sur les trois points en haut à droite",
     after: ", puis « Ouvrir dans le navigateur »",
   },
   en: {
@@ -63,8 +63,12 @@ export default async function DownloadPage() {
           draggable={false}
         />
 
-        {/* `font-sans` = Bricolage Grotesque, la police du site. */}
-        <p className="mt-2 font-sans text-4xl font-bold tracking-tight text-zinc-900">Runly</p>
+        {/*
+          `font-sans` = Bricolage Grotesque, la police du site. La marge négative
+          rattrape le vide du SVG : le dessin est large, sa boîte est carrée, donc
+          il flotte au milieu d'une quarantaine de pixels de blanc.
+        */}
+        <p className="-mt-6 font-sans text-4xl font-bold tracking-tight text-zinc-900">Runly</p>
 
         <p className="mt-10 text-2xl font-semibold leading-snug text-zinc-400 sm:text-3xl">
           {tr.before}
