@@ -33,9 +33,9 @@ export default async function DownloadPage() {
         <Image
           src="/branding/runly.svg"
           alt="Runly"
-          width={112}
-          height={112}
-          className="h-24 w-24 select-none sm:h-28 sm:w-28"
+          width={160}
+          height={160}
+          className="h-32 w-32 select-none sm:h-36 sm:w-36"
           unoptimized
           priority
           draggable={false}
