@@ -14,10 +14,31 @@ import { getLocale } from "@/lib/locale";
  * faire sortir de la webview. `ForceStoreRedirect` tente l'App Store en
  * silence ; la consigne prend le relais quand la webview bloque.
  */
+/** La consigne est coupée en deux : le bouton ⋯ s'insère entre les deux moitiés. */
 const content = {
-  fr: "Touche les trois points en haut à droite, puis « Ouvrir dans le navigateur »",
-  en: "Tap the three dots in the top right, then “Open in browser”",
+  fr: {
+    before: "Touche les trois points en haut à droite",
+    after: ", puis « Ouvrir dans le navigateur »",
+  },
+  en: {
+    before: "Tap the three dots in the top right",
+    after: ", then “Open in browser”",
+  },
 } as const;
+
+/** Reproduction du bouton « ⋯ » des navigateurs intégrés, au fil du texte. */
+function DotsButton() {
+  return (
+    <span
+      aria-hidden
+      className="ml-2 inline-flex h-7 w-7 items-center justify-center gap-0.75 rounded-full bg-zinc-400 align-middle"
+    >
+      <span className="h-1 w-1 rounded-full bg-white" />
+      <span className="h-1 w-1 rounded-full bg-white" />
+      <span className="h-1 w-1 rounded-full bg-white" />
+    </span>
+  );
+}
 
 export const metadata: Metadata = {
   // Une page de transit n'a rien à faire dans les résultats de recherche.
@@ -26,23 +47,29 @@ export const metadata: Metadata = {
 
 export default async function DownloadPage() {
   const locale = await getLocale();
+  const tr = content[locale] ?? content.fr;
 
   return (
     <main className="flex w-full flex-1 items-center justify-center bg-white px-8 py-16 font-sans">
       <div className="flex w-full max-w-sm flex-col items-center text-center">
         <Image
           src="/branding/runly.svg"
-          alt="Runly"
-          width={160}
-          height={160}
-          className="h-32 w-32 select-none sm:h-36 sm:w-36"
+          alt=""
+          width={200}
+          height={200}
+          className="h-40 w-40 select-none sm:h-44 sm:w-44"
           unoptimized
           priority
           draggable={false}
         />
 
+        {/* `font-sans` = Bricolage Grotesque, la police du site. */}
+        <p className="mt-2 font-sans text-4xl font-bold tracking-tight text-zinc-900">Runly</p>
+
         <p className="mt-10 text-2xl font-semibold leading-snug text-zinc-400 sm:text-3xl">
-          {content[locale] ?? content.fr}
+          {tr.before}
+          <DotsButton />
+          {tr.after}
         </p>
 
         <ForceStoreRedirect />
