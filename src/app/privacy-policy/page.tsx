@@ -26,7 +26,7 @@ function GlobeIcon() {
 const content = {
   fr: {
     title: "Politique de confidentialite",
-    lastUpdated: "Dernière mise à jour : 24 avril 2026",
+    lastUpdated: "Dernière mise à jour : 19 août 2026",
     intro:
       "Chez Runly, nous respectons votre vie privee et nous nous engageons a proteger vos donnees personnelles. Cette Politique de confidentialite explique comment nous collectons, utilisons et protegeon vos informations lorsque vous utilisez notre site web et notre application mobile (le « Service »).",
     sections: [
@@ -90,7 +90,7 @@ const content = {
         body: "Si vous etes dans l'UE, nous traitons vos donnees sur la base :",
         list: [
           "Contrat : pour fournir le Service",
-          "Consentement : pour la localisation et les donnees optionnelles",
+          "Consentement : pour la localisation, les donnees optionnelles et la mesure publicitaire",
           "Interet legitime : pour ameliorer et securiser la plateforme",
         ],
       },
@@ -100,6 +100,7 @@ const content = {
         list: [
           "D'autres utilisateurs (votre profil, activite, sessions)",
           "Prestataires de services (hebergement, analyses, infrastructure)",
+          "TikTok, notre partenaire publicitaire, uniquement si vous avez accepte le suivi (voir la section 11)",
           "Les autorites si la loi l'exige",
         ],
       },
@@ -134,6 +135,17 @@ const content = {
       {
         title: "11. Services tiers",
         body: "Runly peut utiliser des services tiers tels que des outils d'analyse et des fournisseurs d'hebergement cloud. Ces prestataires traitent les donnees en notre nom.",
+        subsections: [
+          {
+            subtitle: "Mesure publicitaire (TikTok)",
+            body: "Nous faisons de la publicite pour Runly sur TikTok. Pour savoir quelles annonces amenent reellement des coureurs, l'application integre le SDK publicitaire de TikTok, qui transmet a TikTok l'identifiant publicitaire de votre appareil, un identifiant de compte interne a Runly, et le fait que vous ayez installe l'application, termine votre profil ou souscrit un abonnement. Votre nom, votre adresse e-mail, votre numero de telephone, votre localisation et vos donnees de course ne sont jamais transmis a TikTok.",
+            list: [
+              "Sur iOS, rien n'est transmis sans votre accord : la transmission depend de l'autorisation demandee au premier lancement, et vous pouvez revenir sur ce choix a tout moment dans Reglages > Confidentialite et securite > Suivi.",
+              "Sur Android, vous pouvez supprimer votre identifiant publicitaire dans les parametres Google de votre appareil.",
+              "TikTok est etabli hors de l'Union europeenne : ce transfert est encadre par les clauses contractuelles types de la Commission europeenne.",
+            ],
+          },
+        ],
       },
       {
         title: "12. Protection des mineurs",
@@ -151,7 +163,7 @@ const content = {
   },
   en: {
     title: "Privacy Policy",
-    lastUpdated: "Last updated: April 24, 2026",
+    lastUpdated: "Last updated: August 19, 2026",
     intro:
       "At Runly, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, and protect your information when you use our website and mobile application (the \"Service\").",
     sections: [
@@ -215,7 +227,7 @@ const content = {
         body: "If you are in the EU, we process your data based on:",
         list: [
           "Contract: to provide the Service",
-          "Consent: for location and optional data",
+          "Consent: for location, optional data, and advertising measurement",
           "Legitimate interest: to improve and secure the platform",
         ],
       },
@@ -225,6 +237,7 @@ const content = {
         list: [
           "Other users (your profile, activity, sessions)",
           "Service providers (hosting, analytics, infrastructure)",
+          "TikTok, our advertising partner, only if you allowed tracking (see section 11)",
           "Authorities if required by law",
         ],
       },
@@ -259,6 +272,17 @@ const content = {
       {
         title: "11. Third-Party Services",
         body: "Runly may use third-party services such as analytics tools and cloud hosting providers. These providers process data on our behalf.",
+        subsections: [
+          {
+            subtitle: "Advertising measurement (TikTok)",
+            body: "We advertise Runly on TikTok. To know which ads actually bring runners in, the app includes TikTok's advertising SDK, which sends TikTok your device's advertising identifier, an account identifier internal to Runly, and whether you installed the app, completed your profile, or subscribed. Your name, email address, phone number, location, and running data are never sent to TikTok.",
+            list: [
+              "On iOS, nothing is sent without your permission: it depends on the tracking request shown at first launch, and you can change your mind at any time in Settings > Privacy & Security > Tracking.",
+              "On Android, you can delete your advertising identifier in your device's Google settings.",
+              "TikTok is established outside the European Union: this transfer is governed by the European Commission's Standard Contractual Clauses.",
+            ],
+          },
+        ],
       },
       {
         title: "12. Children's Privacy",
